@@ -1,0 +1,28 @@
+.menu-card {
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .menu-card:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Add your preferred colors here */
+  .card-primary {
+    background-color: #ff6384;
+  }
+  
+  .card-secondary {
+    background-color: #36a2eb;
+  }
+  
+  .card-success {
+    background-color: #ffce56;
+  }
+  
+  .card-danger {
+    background-color: #ff9f40;
+  }

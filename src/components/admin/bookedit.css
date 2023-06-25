@@ -1,0 +1,61 @@
+/* BookEdit.css */
+
+.book-card {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 16px;
+}
+
+.btn-group {
+  margin-top: 20px;
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.modal-body p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.modal-body ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.modal-body li {
+  margin-bottom: 10px;
+}
+
+.modal-body a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 16px;
+}
+
+.modal-body a:hover {
+  text-decoration: underline;
+}

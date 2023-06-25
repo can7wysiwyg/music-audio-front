@@ -1,0 +1,57 @@
+body {
+    background-color: #f8f9fa;
+  }
+  
+  .book-details {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  
+  .book-details h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .book-details img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .book-details p {
+    margin-bottom: 0;
+  }
+  
+  .book-details .btn {
+    display: block;
+    margin: 30px auto 0;
+  }
+  
+  /* Audio player styles */
+  .audio-player {
+    margin-top: 20px;
+  }
+  
+  .audio-player audio {
+    width: 100%;
+  }
+  
+  /* Animations */
+  .fade-in {
+    opacity: 0;
+    animation: fadeInAnimation ease 1s forwards;
+  }
+  
+  @keyframes fadeInAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

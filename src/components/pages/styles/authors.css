@@ -1,0 +1,19 @@
+.author-card {
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .author-card:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .author-card .author-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
