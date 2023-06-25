@@ -1,11 +1,5 @@
-:root {
-  --primary-color: #3f51b5;  /* Blue */
-  --secondary-color: #f44336;  /* Red */
-  --text-color: #333333;  /* Dark Gray */
-}
 
-/* Navbar */
-.nav {
+/* .nav {
   background-color: blue;
 }
 
@@ -19,7 +13,7 @@
 }
 
 
-/* header */
+
 
 .header-image {
   background: url('./components/images/bg.jpg') center center/cover no-repeat;
@@ -44,4 +38,4 @@
 .animated {
   animation-duration: 1s;
   animation-fill-mode: both;
-}
+}   */

@@ -1,0 +1,37 @@
+.navbar {
+    background-color: #333;
+    padding: 10px;
+  }
+  
+  .navbar-brand {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .navbar-toggler {
+    border-color: #fff;
+  }
+  
+  .nav-link {
+    color: #fff;
+  }
+  
+  .dropdown-menu {
+    background-color: #333;
+  }
+  
+  .dropdown-item {
+    color: #fff;
+  }
+  
+  .search-form {
+    margin-right: 10px;
+  }
+  
+  .search-form input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 200px;
+  }
