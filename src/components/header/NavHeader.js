@@ -63,7 +63,7 @@ function Webname() {
     
     <ul className="navbar-nav ml-auto">
           <li className="nav-item active">
-            <Link className="nav-link" to="/">Management</Link>
+            <Link className="nav-link" to="/admin_panel">Management</Link>
           </li>
           </ul>
 

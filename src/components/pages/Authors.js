@@ -1,44 +1,95 @@
-import "./styles/authors.css"
-
+import axios from "axios";
+import "./styles/authors.css";
+import { useState, useEffect } from "react";
 
 function Authors() {
-    return(<>
+  const [results, setAuthors] = useState([]);
 
-<div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="author-card">
-          <img class="author-pic" src="author1.jpg" alt="Author 1" />
-          <h5 class="card-title">Author 1</h5>
-          <p class="card-text">Description for Author 1</p>
-          <a href="/" class="btn btn-primary">Read More</a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="author-card">
-          <img class="author-pic" src="author2.jpg" alt="Author 2" />
-          <h5 class="card-title">Author 2</h5>
-          <p class="card-text">Description for Author 2</p>
-          <a href="/" class="btn btn-primary">Read More</a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="author-card">
-          <img class="author-pic" src="author3.jpg" alt="Author 3" />
-          <h5 class="card-title">Author 3</h5>
-          <p class="card-text">Description for Author 3</p>
-          <a href="/" class="btn btn-primary">Read More</a>
-        </div>
+  useEffect(() => {
+    const getAuthors = async () => {
+      const res = await axios.get("/author/show_all");
+      setAuthors(res.data.authors);
+    };
+
+    getAuthors();
+  }, []);
+
+  if (results.length === 0) {
+    return (
+      <>
+        <h1 className="text-center">😏😏😎😎😁😁 loading... </h1>
+      </>
+    );
+  }
+
+  return (
+    <div className="container">
+      <div className="row">
+        {results.map((result, index) => (
+          <div key={index} className="col-md-4">
+            <DisplayAuthors result={result} />
+          </div>
+        ))}
       </div>
     </div>
-  </div>
-
-
-
-
-    
-    
-    </>)
+  );
 }
 
-export default Authors
+const DisplayAuthors = ({ result }) => {
+  function authorsOnDisplay() {
+    let imagePath = result.AuthorImage.authorImageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
+
+    if (imagePath.startsWith("uploads/")) {
+      let imageUrl = `http://localhost:5000/${imagePath}`;
+      return (
+        <>
+        <div className="author-card">
+  <figure>
+    <img className="author-pic" src={imageUrl} alt={result.AuthorName} />
+  </figure>
+  <div>
+    <h5 className="card-title">{result.AuthorName}</h5>
+    <p className="card-text">Email: {result.AuthorEmail}</p>
+    <p className="card-text">Phone Number: {result.AuthorPhoneNumber}</p>
+    <p className="card-text">Location: {result.AuthorLocation}</p>
+    <a href="/" className="btn btn-primary">
+      View Author's Books
+    </a>
+  </div>
+</div>
+<br />
+
+          
+        </>
+      );
+    } else {
+      let imageUrl = `http://localhost:5000${imagePath}`;
+
+      return (
+        <>
+        <div className="author-card">
+  <figure>
+    <img className="author-pic" src={imageUrl} alt={result.AuthorName} />
+  </figure>
+  <div>
+    <h5 className="card-title">{result.AuthorName}</h5>
+    <p className="card-text">Email: {result.AuthorEmail}</p>
+    <p className="card-text">Phone Number: {result.AuthorPhoneNumber}</p>
+    <p className="card-text">Location: {result.AuthorLocation}</p>
+    <a href="/" className="btn btn-primary">
+      View Author's Books
+    </a>
+  </div>
+</div>
+<br />
+
+         
+        </>
+      );
+    }
+  }
+
+  return <>{authorsOnDisplay()}</>;
+};
+
+export default Authors;

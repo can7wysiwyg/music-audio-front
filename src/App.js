@@ -15,6 +15,8 @@ import BookEdit from "./components/admin/BookEdit";
 import AuthorEdit from "./components/admin/AuthorEdit";
 import BookAccordingToCat from "./components/pages/BookAccordingToCat";
 import Login from "./components/admin/Login";
+import Testo from "./components/pages/Testo";
+import AuthorCreate from "./components/admin/AuthorCreate";
 
 
 
@@ -40,6 +42,8 @@ function App() {
     <Route path="/author_edit" element={<AuthorEdit />} />
     <Route path="/book_cat" element={<BookAccordingToCat />} />
     <Route path="/smogazboard" element={<Login />} />
+    <Route path="/testo"element={ <Testo /> } />
+    <Route path="/create_author" element={ <AuthorCreate />} />
     
 
 
