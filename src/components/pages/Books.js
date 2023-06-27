@@ -42,6 +42,38 @@ function Books() {
 
 const DisplayBooks = ({ audioItem }) => {
 
+  const[writers, setWriters] = useState([])
+  const[newWriters, setNewWriters] = useState({})
+
+  useEffect(() => {
+
+    const getAuthors = async() => {
+      const res = await axios.get("/author/show_all");
+      setWriters(res.data.authors);
+
+    }
+
+    getAuthors()
+
+  }, [])
+
+  
+
+  useEffect(() => {
+    if(audioItem.authorName) {
+
+      writers.forEach((writer) => {
+        if(writer._id === audioItem.authorName) {
+          setNewWriters(writer)
+
+        }
+      })
+
+    }
+
+  }, [audioItem.authorName, writers])
+
+  
   function listBooksDisplay() {
     let audioPath = audioItem.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
     let imagePath = audioItem.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
@@ -59,13 +91,14 @@ const DisplayBooks = ({ audioItem }) => {
     </div>
 
   <div className="card-content">
-    <h5 className="card-title"> {audioItem.bookTitle} </h5>
-    <p className="card-text">Description for Book 1</p>
+  <a href={`/book_single/${audioItem._id}`}  style={{ textDecoration: "none"}}>{audioItem.bookTitle}</a>
+    <p className="card-text">{ newWriters.AuthorName }</p>
     <audio controls>
       <source src={audioUrl} type="audio/mpeg" />
     </audio>
   </div>
 </div>
+<br />
 
           
         </>
@@ -83,8 +116,8 @@ const DisplayBooks = ({ audioItem }) => {
     </div>
   
   <div className="card-content">
-    <a href={`/book_single/${audioItem._id}`} className="card-title" style={{ textDecoration: "none"}}>{audioItem.bookTitle}</a>
-    <p className="card-text">{audioItem.authorName}</p>
+    <a href={`/book_single/${audioItem._id}`}  style={{ textDecoration: "none"}}>{audioItem.bookTitle}</a>
+    <p className="card-text">{ newWriters.AuthorName }</p>
     
     <audio controls>
       <source src={audioUrl} type="audio/mpeg" />
@@ -93,6 +126,7 @@ const DisplayBooks = ({ audioItem }) => {
     
   </div>
 </div>
+<br />
 
         
       </>
