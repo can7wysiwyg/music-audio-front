@@ -1,18 +1,29 @@
-.book-card {
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-  }
+ .book-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
 
-  .book-card:hover {
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-  }
+.book-card .image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px; /* Adjust the height as needed */
+ } 
 
-  .book-card .book-image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
-  }
+.book-card .book-image {
+  width: 300%; 
+  height: 300%;
+  object-fit: cover;
+
+}
+
+.card-content {
+  padding: 10px;
+} 
+
+
+.card-content .btn {
+  margin-top: 10px; /* Add margin top to create space */
+}
