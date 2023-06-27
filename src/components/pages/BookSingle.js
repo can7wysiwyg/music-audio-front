@@ -69,7 +69,8 @@ function BookSingle() {
     >
       <h2>{singleBook.bookTitle}</h2>
       <img src={imageUrl} alt="Book Cover" />
-      <p>Author: {writer?.AuthorName}</p>
+      <a href={`/author_single/${writer._id}`} className="card-title" style={{textDecoration: "none"}}>{writer?.AuthorName}</a>
+      {/* <p>Author: {writer?.AuthorName}</p> */}
       <p>Genre: Fiction</p>
       <p>
         Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -103,7 +104,8 @@ function BookSingle() {
     >
       <h2>{singleBook.bookTitle}</h2>
       <img src={imageUrl} alt="Book Cover" />
-      <p>Author: {writer?.AuthorName}</p>
+      <a href={`/author_single/${writer._id}`} className="card-title" style={{textDecoration: "none"}}>{writer?.AuthorName}</a>
+      {/* <p>Author: {writer?.AuthorName}</p> */}
       <p>Genre: Fiction</p>
       <p>
         Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.

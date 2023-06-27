@@ -48,7 +48,7 @@ const DisplayAuthors = ({ result }) => {
     <img className="author-pic" src={imageUrl} alt={result.AuthorName} />
   </figure>
   <div>
-    <h5 className="card-title">{result.AuthorName}</h5>
+  <a href={`/author_single/${result._id}`} className="card-title" style={{textDecoration: "none"}}>{result.AuthorName}</a>
     <p className="card-text">Email: {result.AuthorEmail}</p>
     <p className="card-text">Phone Number: {result.AuthorPhoneNumber}</p>
     <p className="card-text">Location: {result.AuthorLocation}</p>
@@ -72,7 +72,7 @@ const DisplayAuthors = ({ result }) => {
     <img className="author-pic" src={imageUrl} alt={result.AuthorName} />
   </figure>
   <div>
-    <h5 className="card-title">{result.AuthorName}</h5>
+    <a href={`/author_single/${result._id}`} className="card-title" style={{textDecoration: "none"}}>{result.AuthorName}</a>
     <p className="card-text">Email: {result.AuthorEmail}</p>
     <p className="card-text">Phone Number: {result.AuthorPhoneNumber}</p>
     <p className="card-text">Location: {result.AuthorLocation}</p>
