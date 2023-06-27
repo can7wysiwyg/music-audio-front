@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { FaUpload } from "react-icons/fa";
 import Pagination from "react-bootstrap/Pagination";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -39,6 +39,7 @@ function AuthorSelector() {
 
   return (
     <div className="container mt-5">
+        <h1 className="text-center">Select Author You Would Like To Upload A Book For</h1>
       <div className="row">
         <ul className="list-group">
           {currentCards.map((result, index) => (
@@ -63,6 +64,10 @@ function AuthorSelector() {
 
 
 const AuthorsList = ({result}) => {
+
+    const buttonRedirect = () => {
+        window.location.href = `/book_upload_form/${result._id}`
+    }
 
      function listAuthorsDisplay() {
         let imagePath = result.AuthorImage.authorImageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
@@ -93,30 +98,16 @@ const AuthorsList = ({result}) => {
     <p className="mb-1">{result.AuthorLocation}</p>
   </div>
   <div className="ms-auto">
+    
     <OverlayTrigger
       placement="left"
-      overlay={<Tooltip>View</Tooltip>}
+      overlay={<Tooltip>Upload Book</Tooltip>}
     >
-      <button className="btn btn-link">
-        <FaEye />
+      <button className="btn btn-link" onClick={buttonRedirect}>
+        <FaUpload />
       </button>
     </OverlayTrigger>
-    <OverlayTrigger
-      placement="left"
-      overlay={<Tooltip>Edit</Tooltip>}
-    >
-      <button className="btn btn-link">
-        <FaEdit />
-      </button>
-    </OverlayTrigger>
-    <OverlayTrigger
-      placement="left"
-      overlay={<Tooltip>Delete</Tooltip>}
-    >
-      <button className="btn btn-link">
-        <FaTrash />
-      </button>
-    </OverlayTrigger>
+    
   </div>
 </li>
 
@@ -134,56 +125,40 @@ const AuthorsList = ({result}) => {
 
         return (
             <>
-            <li
-                  
-                  className="list-group-item d-flex align-items-center"
-                >
-                  <div className="avatar-container me-3">
-                    <OverlayTrigger
-                      placement="right"
-                      overlay={<Tooltip>{result.AuthorName}</Tooltip>}
-                    >
-                      <img
-                        className="avatar"
-                        src={imageUrl}
-                        alt={result.AuthorName}
-                      />
-                    </OverlayTrigger>
-                  </div>
-                  <div>
-                    <h5 className="mb-1">{result.AuthorName}</h5>
-                    <p className="mb-1">{result.AuthorEmail}</p>
-                    <p className="mb-1">{result.AuthorPhoneNumber}</p>
-                    <p className="mb-1">{result.AuthorLocation}</p>
-                  </div>
-                  <div className="ms-auto">
-                    <OverlayTrigger
-                      placement="left"
-                      overlay={<Tooltip>View</Tooltip>}
-                    >
-                      <button className="btn btn-link">
-                        <FaEye />
-                      </button>
-                    </OverlayTrigger>
-                    <OverlayTrigger
-                      placement="left"
-                      overlay={<Tooltip>Edit</Tooltip>}
-                    >
-                      <button className="btn btn-link">
-                        <FaEdit />
-                      </button>
-                    </OverlayTrigger>
-                    <OverlayTrigger
-                      placement="left"
-                      overlay={<Tooltip>Delete</Tooltip>}
-                    >
-                      <button className="btn btn-link">
-                        <FaTrash />
-                      </button>
-                    </OverlayTrigger>
-                  </div>
-                </li>
+            <li className="list-group-item d-flex align-items-center p-3">
+  <div className="avatar-container me-3">
+    <OverlayTrigger
+      placement="right"
+      overlay={<Tooltip>{result.AuthorName}</Tooltip>}
+    >
+      <div className="avatar-wrapper">
+        <img
+          className="avatar"
+          src={imageUrl}
+          alt={result.AuthorName}
+        />
+      </div>
+    </OverlayTrigger>
+  </div>
+  <div className="content">
+    <h5 className="mb-1">{result.AuthorName}</h5>
+    <p className="mb-1">{result.AuthorEmail}</p>
+    <p className="mb-1">{result.AuthorPhoneNumber}</p>
+    <p className="mb-1">{result.AuthorLocation}</p>
+  </div>
+  <div className="ms-auto">
     
+    <OverlayTrigger
+      placement="left"
+      overlay={<Tooltip>Upload Book</Tooltip>}
+    >
+      <button className="btn btn-link" onClick={buttonRedirect}>
+        <FaUpload />
+      </button>
+    </OverlayTrigger>
+    
+  </div>
+</li>
             
             
             

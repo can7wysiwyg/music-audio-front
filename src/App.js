@@ -18,6 +18,7 @@ import Login from "./components/admin/Login";
 import Testo from "./components/pages/Testo";
 import AuthorCreate from "./components/admin/AuthorCreate";
 import AuthorSelector from "./components/admin/AuthorSelector";
+import BookUploadForm from "./components/admin/BookUploadForm";
 
 
 
@@ -46,6 +47,7 @@ function App() {
     <Route path="/testo"element={ <Testo /> } />
     <Route path="/create_author" element={ <AuthorCreate />} />
     <Route path="/author_selector" element={<AuthorSelector />} />
+    <Route path="/book_upload_form/:id" element={ <BookUploadForm /> } />
     
 
 
