@@ -17,6 +17,7 @@ import BookAccordingToCat from "./components/pages/BookAccordingToCat";
 import Login from "./components/admin/Login";
 import Testo from "./components/pages/Testo";
 import AuthorCreate from "./components/admin/AuthorCreate";
+import AuthorSelector from "./components/admin/AuthorSelector";
 
 
 
@@ -44,6 +45,7 @@ function App() {
     <Route path="/smogazboard" element={<Login />} />
     <Route path="/testo"element={ <Testo /> } />
     <Route path="/create_author" element={ <AuthorCreate />} />
+    <Route path="/author_selector" element={<AuthorSelector />} />
     
 
 
