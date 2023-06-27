@@ -84,22 +84,25 @@ const DisplayBooks = ({ audioItem }) => {
 
       return (
         <>
-        <div className="book-card">
-  
-    <div className="image-container">
-      <img className="book-image" src={imageUrl} alt="Book 1" />
-    </div>
+
+<div className="book-card">
+  <div className="image-container">
+    <img className="book-image" src={imageUrl} alt="Book 1" />
+  </div>
 
   <div className="card-content">
-  <a href={`/book_single/${audioItem._id}`}  style={{ textDecoration: "none"}}>{audioItem.bookTitle}</a>
-    <p className="card-text">{ newWriters.AuthorName }</p>
-    <audio controls>
-      <source src={audioUrl} type="audio/mpeg" />
-    </audio>
+    <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }}>{audioItem.bookTitle}</a>
+    <p className="card-text">{newWriters.AuthorName}</p>
+    <div className="audio-container">
+      <audio controls>
+        <source src={audioUrl} type="audio/mpeg" />
+      </audio>
+    </div>
   </div>
 </div>
 <br />
 
+   
           
         </>
       );
@@ -109,25 +112,25 @@ const DisplayBooks = ({ audioItem }) => {
 
     return (
       <>
-      <div className="book-card">
-  
-    <div className="image-container">
-      <img className="book-image" src={imageUrl} alt="Book 1" />
-    </div>
-  
-  <div className="card-content">
-    <a href={`/book_single/${audioItem._id}`}  style={{ textDecoration: "none"}}>{audioItem.bookTitle}</a>
-    <p className="card-text">{ newWriters.AuthorName }</p>
-    
-    <audio controls>
-      <source src={audioUrl} type="audio/mpeg" />
-    </audio>
 
-    
+<div className="book-card">
+  <div className="image-container">
+    <img className="book-image" src={imageUrl} alt="Book 1" />
+  </div>
+
+  <div className="card-content">
+    <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }}>{audioItem.bookTitle}</a>
+    <p className="card-text">{newWriters.AuthorName}</p>
+    <div className="audio-container">
+      <audio controls>
+        <source src={audioUrl} type="audio/mpeg" />
+      </audio>
+    </div>
   </div>
 </div>
 <br />
 
+      
         
       </>
     );

@@ -67,7 +67,7 @@ function BookSingle() {
       className={`book-details ${fadeIn ? 'fade-in' : ''}`}
       ref={bookDetailsRef}
     >
-      <h2>Book Title</h2>
+      <h2>{singleBook.bookTitle}</h2>
       <img src={imageUrl} alt="Book Cover" />
       <p>Author: {writer?.AuthorName}</p>
       <p>Genre: Fiction</p>
@@ -101,7 +101,7 @@ function BookSingle() {
       className={`book-details ${fadeIn ? 'fade-in' : ''}`}
       ref={bookDetailsRef}
     >
-      <h2>Book Title</h2>
+      <h2>{singleBook.bookTitle}</h2>
       <img src={imageUrl} alt="Book Cover" />
       <p>Author: {writer?.AuthorName}</p>
       <p>Genre: Fiction</p>
