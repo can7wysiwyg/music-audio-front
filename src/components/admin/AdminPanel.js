@@ -16,6 +16,14 @@ function AdminPanel() {
           <p className="card-text" style={{color: "black"}}>Upload Author's books</p>
         </div>
       </div>
+      {/*  */}
+      <div className="col-md-4">
+        <div className="menu-card card-danger">
+          <a href="/categories"  className="card-title" style={{color: "black"}}>Categories</a>
+          <p className="card-text" style={{color: "black"}}>Create and manage categories</p>
+        </div>
+      </div>
+      {/*  */}
       <div className="col-md-4">
         <div className="menu-card card-success">
           <h5 className="card-title">Author Management</h5>
@@ -27,6 +35,10 @@ function AdminPanel() {
           <h5 className="card-title">Book Management</h5>
           <p className="card-text">Description for Menu Item 4</p>
         </div>
+
+      
+
+
       </div>
     </div>
   </div>
