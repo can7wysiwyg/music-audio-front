@@ -71,6 +71,9 @@ useEffect(() => {
     }
   };
 
+   
+
+
   return (
     <>
       <Navbar bg="dark" expand="lg">
@@ -82,10 +85,10 @@ useEffect(() => {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/authors">Authors</Nav.Link>
             <Nav.Link href="/books">Books</Nav.Link>
-            <NavDropdown title="Book Genres" id="basic-nav-dropdown">
+            <NavDropdown title="Book Genres" id="basic-nav-dropdown"   >
               {
                 categories?.map((category) => {
-                  return  <NavDropdown.Item href="/" key={category._id}>{category.bookGenre}</NavDropdown.Item>
+                  return  <NavDropdown.Item href={`/book_cat/${category._id}`}  key={category._id}>{category.bookGenre}</NavDropdown.Item>
                 })
               } 
             </NavDropdown>

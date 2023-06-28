@@ -44,7 +44,7 @@ function App() {
     <Route path="/book_management" element={<BookManagement />} />
     <Route path="/book_edit" element={ <BookEdit /> } />
     <Route path="/author_edit" element={<AuthorEdit />} />
-    <Route path="/book_cat" element={<BookAccordingToCat />} />
+    <Route path="/book_cat/:id" element={<BookAccordingToCat />} />
     <Route path="/smogazboard" element={<Login />} />
     <Route path="/testo"element={ <Testo /> } />
     <Route path="/create_author" element={ <AuthorCreate />} />
