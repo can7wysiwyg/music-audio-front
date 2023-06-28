@@ -4,18 +4,17 @@ import axios from "axios";
 
 function Books() {
   const [audios, setAudios] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [audiosPerPage] = useState(4);
 
   useEffect(() => {
     const getBooks = async () => {
       const res = await axios.get("/audio/show_all");
-
       setAudios(res.data.books);
     };
 
     getBooks();
   }, []);
-
-  
 
   if (audios.length === 0) {
     return (
@@ -25,20 +24,43 @@ function Books() {
     );
   }
 
+  // Pagination logic
+  const indexOfLastAudio = currentPage * audiosPerPage;
+  const indexOfFirstAudio = indexOfLastAudio - audiosPerPage;
+  const currentAudios = audios.slice(indexOfFirstAudio, indexOfLastAudio);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <>
       <div className="container">
         <div className="row">
-          {audios?.map((audioItem, index) => (
+          {currentAudios?.map((audioItem, index) => (
             <div key={index} className="col-md-4">
               <DisplayBooks audioItem={audioItem} />
             </div>
           ))}
         </div>
       </div>
+
+      {/* Pagination */}
+      <nav className="mt-4">
+        <ul className="pagination justify-content-center">
+          {Array.from({ length: Math.ceil(audios.length / audiosPerPage) }).map((_, index) => (
+            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+              <button className="page-link" onClick={() => paginate(index + 1)}>
+                {index + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </>
   );
 }
+
+
+
 
 const DisplayBooks = ({ audioItem }) => {
 

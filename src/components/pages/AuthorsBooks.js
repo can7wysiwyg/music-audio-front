@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -6,6 +7,8 @@ import "./styles/books.css";
 const AuthorsBooks = () => {
   const { id } = useParams();
   const [cards, setCards] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(4);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,25 +31,54 @@ const AuthorsBooks = () => {
     );
   }
 
+  // Pagination logic
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
-    <>
     <div className="container">
       <div className="row">
-        {cards.map((result, index) => (
+        {currentCards.map((result, index) => (
           <div key={index} className="col-md-4">
-            <MyBooks result={result} />
-            </div>
-))}
-</div>
-</div>
+            <MyBooks result={result} id={id} />
+          </div>
+        ))}
+      </div>
 
-    
-    
-    </>
-      );
+      {/* Pagination */}
+      <nav className="mt-4">
+        <ul className="pagination justify-content-center">
+          {Array.from({ length: Math.ceil(cards.length / cardsPerPage) }).map((_, index) => (
+            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+              <button className="page-link" onClick={() => paginate(index + 1)}>
+                {index + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  );
 };
 
-const MyBooks = ({result}) => {
+
+const MyBooks = ({result, id}) => {
+    const[writer, setWriter] = useState([])
+
+    useEffect(() => {
+        const getAuthors = async () => {
+          const res = await axios.get(`/author/show_single/${id}`);
+          setWriter(res.data.result);
+        };
+      
+        
+          getAuthors();
+        
+      }, [id]);
+  
 
 
     function listBooksDisplay() {
@@ -67,7 +99,7 @@ const MyBooks = ({result}) => {
     
       <div className="card-content">
         <a href={`/book_single/${result._id}`} style={{ textDecoration: "none" }}>{result.bookTitle}</a>
-        {/* <p className="card-text">{result.AuthorName}</p> */}
+        <p className="card-text">{writer.AuthorName}</p>
         <div className="audio-container">
           <audio controls>
             <source src={audioUrl} type="audio/mpeg" />
@@ -95,7 +127,7 @@ const MyBooks = ({result}) => {
     
       <div className="card-content">
         <a href={`/book_single/${result._id}`} style={{ textDecoration: "none" }}>{result.bookTitle}</a>
-        {/* <p className="card-text">{newWriters.AuthorName}</p> */}
+        <p className="card-text">{writer.AuthorName}</p>
         <div className="audio-container">
           <audio controls>
             <source src={audioUrl} type="audio/mpeg" />

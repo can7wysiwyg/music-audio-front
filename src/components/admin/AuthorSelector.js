@@ -4,7 +4,7 @@ import { FaUpload } from "react-icons/fa";
 import Pagination from "react-bootstrap/Pagination";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import "./authorselector.css"
+import "./authorselector.css";
 
 function AuthorSelector() {
   const [results, setAuthors] = useState([]);
@@ -39,12 +39,11 @@ function AuthorSelector() {
 
   return (
     <div className="container mt-5">
-        <h1 className="text-center">Select Author You Would Like To Upload A Book For</h1>
+      <h1 className="text-center">Select Author You Would Like To Upload A Book For</h1>
       <div className="row">
         <ul className="list-group">
           {currentCards.map((result, index) => (
             <AuthorsList key={index} result={result} />
-           
           ))}
         </ul>
       </div>
@@ -53,6 +52,15 @@ function AuthorSelector() {
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
         />
+        {Array.from({ length: Math.ceil(results.length / cardsPerPage) }).map((_, index) => (
+          <Pagination.Item
+            key={index + 1}
+            active={index + 1 === currentPage}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
         <Pagination.Next
           disabled={indexOfLastCard >= results.length}
           onClick={() => handlePageChange(currentPage + 1)}
@@ -61,6 +69,8 @@ function AuthorSelector() {
     </div>
   );
 }
+
+
 
 
 const AuthorsList = ({result}) => {

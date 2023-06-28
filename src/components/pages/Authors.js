@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 function Authors() {
   const [results, setAuthors] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [authorsPerPage] = useState(6);
 
   useEffect(() => {
     const getAuthors = async () => {
@@ -22,18 +24,40 @@ function Authors() {
     );
   }
 
+  // Pagination logic
+  const indexOfLastAuthor = currentPage * authorsPerPage;
+  const indexOfFirstAuthor = indexOfLastAuthor - authorsPerPage;
+  const currentAuthors = results.slice(indexOfFirstAuthor, indexOfLastAuthor);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="container">
       <div className="row">
-        {results.map((result, index) => (
+        {currentAuthors.map((result, index) => (
           <div key={index} className="col-md-4">
             <DisplayAuthors result={result} />
           </div>
         ))}
       </div>
+
+      {/* Pagination */}
+      <nav className="mt-4">
+        <ul className="pagination justify-content-center">
+          {Array.from({ length: Math.ceil(results.length / authorsPerPage) }).map((_, index) => (
+            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+              <button className="page-link" onClick={() => paginate(index + 1)}>
+                {index + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 }
+
+
 
 const DisplayAuthors = ({ result }) => {
   function authorsOnDisplay() {
