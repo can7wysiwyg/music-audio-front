@@ -52,7 +52,7 @@ const DisplayAuthors = ({ result }) => {
     <p className="card-text">Email: {result.AuthorEmail}</p>
     <p className="card-text">Phone Number: {result.AuthorPhoneNumber}</p>
     <p className="card-text">Location: {result.AuthorLocation}</p>
-    <a href="/" className="btn btn-primary">
+    <a href={`/authors_books/${result._id}`} className="btn btn-primary">
       View Author's Books
     </a>
   </div>
@@ -76,7 +76,7 @@ const DisplayAuthors = ({ result }) => {
     <p className="card-text">Email: {result.AuthorEmail}</p>
     <p className="card-text">Phone Number: {result.AuthorPhoneNumber}</p>
     <p className="card-text">Location: {result.AuthorLocation}</p>
-    <a href="/" className="btn btn-primary">
+    <a href={`/authors_books/${result._id}`} className="btn btn-primary">
       View Author's Books
     </a>
   </div>
