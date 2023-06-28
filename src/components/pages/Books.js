@@ -5,7 +5,7 @@ import axios from "axios";
 function Books() {
   const [audios, setAudios] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [audiosPerPage] = useState(4);
+  const [audiosPerPage] = useState(6);
 
   useEffect(() => {
     const getBooks = async () => {
@@ -63,6 +63,8 @@ function Books() {
 
 
 const DisplayBooks = ({ audioItem }) => {
+
+  
 
   const[writers, setWriters] = useState([])
   const[newWriters, setNewWriters] = useState({})

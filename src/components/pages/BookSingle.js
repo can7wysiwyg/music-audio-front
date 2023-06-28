@@ -8,6 +8,8 @@ function BookSingle() {
     const [fadeIn, setFadeIn] = useState(false);
     const[singleBook, setSingleBook] = useState({})
     const[writer, setWriter] = useState([])
+    const [categories, setCategories] = useState([]);
+    const[genres, setGenre] = useState({})
     const bookDetailsRef = useRef(null);
 
 
@@ -31,7 +33,33 @@ function BookSingle() {
       }
     }, [singleBook.authorName, id]);
 
-    
+
+    useEffect(() => {
+
+      const getGenres = async () => {
+        const res = await axios.get('/genre/show_all');
+        setCategories(res.data.results);
+      };
+  
+      getGenres();
+
+
+    }, [])
+
+
+    useEffect(() => {
+
+      if(singleBook.audioGenre) {
+
+categories.forEach((category) => {
+  if(category._id === singleBook.audioGenre) setGenre(category)
+})
+
+      }
+
+
+    }, [singleBook.audioGenre, categories])
+
 
   useEffect(() => {
     setFadeIn(true);
@@ -71,10 +99,9 @@ function BookSingle() {
       <img src={imageUrl} alt="Book Cover" />
       <a href={`/author_single/${writer._id}`} className="card-title" style={{textDecoration: "none"}}>{writer?.AuthorName}</a>
       {/* <p>Author: {writer?.AuthorName}</p> */}
-      <p>Genre: Fiction</p>
+      <p>Genre: {genres.bookGenre} </p>
       <p>
-        Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Morbi vitae urna volutpat, tincidunt magna vel, malesuada purus.
+        Description: { singleBook.bookDescription }
       </p>
       <div className="audio-player">
         <audio controls>
@@ -106,10 +133,9 @@ function BookSingle() {
       <img src={imageUrl} alt="Book Cover" />
       <a href={`/author_single/${writer._id}`} className="card-title" style={{textDecoration: "none"}}>{writer?.AuthorName}</a>
       {/* <p>Author: {writer?.AuthorName}</p> */}
-      <p>Genre: Fiction</p>
+      <p>Genre: {genres.bookGenre}</p>
       <p>
-        Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Morbi vitae urna volutpat, tincidunt magna vel, malesuada purus.
+        Description: { singleBook.bookDescription }
       </p>
       <div className="audio-player">
         <audio controls>

@@ -51,8 +51,8 @@ function AuthorSingle() {
 
 <h2>{ writer.AuthorName }</h2>
       <img src={imageUrl} alt="Author Avatar" />
-      <p>Genre: Fiction</p>
-      <p>Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae urna volutpat, tincidunt magna vel, malesuada purus.</p>
+      <p className='text-dark'> location: {writer.AuthorLocation}</p>
+      <p className='text-dark '>email: {writer.AuthorEmail}</p>
       <p>Website: <a href="https://www.authorwebsite.com">www.authorwebsite.com</a></p>
       <div className="social-icons">
         <a href="/"><i className="fab fa-facebook"></i></a>
@@ -86,8 +86,8 @@ function AuthorSingle() {
 
 <h2>{ writer.AuthorName }</h2>
       <img src={imageUrl} alt="Author Avatar" />
-      <p>Genre: Fiction</p>
-      <p>Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae urna volutpat, tincidunt magna vel, malesuada purus.</p>
+      <p className='text-dark'>location: {writer.AuthorLocation}</p>
+      <p className='text-dark'>email: {writer.AuthorEmail}</p>
       <p>Website: <a href="https://www.authorwebsite.com">www.authorwebsite.com</a></p>
       <div className="social-icons">
         <a href="/"><i className="fab fa-facebook"></i></a>
