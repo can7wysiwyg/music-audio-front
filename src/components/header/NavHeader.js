@@ -1,7 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GlobalState } from "../../GlobalState";
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  NavDropdown
+} from "react-bootstrap";
 import "./header.css";
 import axios from "axios";
 
@@ -10,19 +14,15 @@ function NavHeader() {
   const [isLogged] = state.userApi.isLogged;
   const [isAdmin] = state.userApi.isAdmin;
   const [categories, setCategories] = useState([]);
+  
+  useEffect(() => {
+    const getGenres = async () => {
+      const res = await axios.get("/genre/show_all");
+      setCategories(res.data.results);
+    };
 
-useEffect(() => {
-
-  const getGenres = async () => {
-    const res = await axios.get('/genre/show_all');
-    setCategories(res.data.results);
-  };
-
-  getGenres();
-
-
-
-}, [])  
+    getGenres();
+  }, []);
 
   const logoutUser = async () => {
     localStorage.removeItem("token");
@@ -71,9 +71,6 @@ useEffect(() => {
     }
   };
 
-   
-
-
   return (
     <>
       <Navbar bg="dark" expand="lg">
@@ -85,21 +82,24 @@ useEffect(() => {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/authors">Authors</Nav.Link>
             <Nav.Link href="/books">Books</Nav.Link>
-            <NavDropdown title="Book Genres" id="basic-nav-dropdown"   >
-              {
-                categories?.map((category) => {
-                  return  <NavDropdown.Item href={`/book_cat/${category._id}`}  key={category._id}>{category.bookGenre}</NavDropdown.Item>
-                })
-              } 
+            <Nav.Link href="/new_books">New Books</Nav.Link>
+            <Nav.Link href="/search_books">Search Books</Nav.Link>
+            <NavDropdown title="Book Genres" id="basic-nav-dropdown">
+              {categories?.map((category) => {
+                return (
+                  <NavDropdown.Item
+                    href={`/book_cat/${category._id}`}
+                    key={category._id}
+                  >
+                    {category.bookGenre}
+                  </NavDropdown.Item>
+                );
+              })}
             </NavDropdown>
             <Nav.Link href="/about">About Us</Nav.Link>
             <Nav.Link href="/contact">Contact Us</Nav.Link>
           </Nav>
-          <Form inline className="search-form">
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-light">Search</Button>
-          </Form>
-          {isLogged ? loggedRouter() : ""}
+                   {isLogged ? loggedRouter() : ""}
         </Navbar.Collapse>
       </Navbar>
     </>
