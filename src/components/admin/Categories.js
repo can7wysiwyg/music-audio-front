@@ -20,6 +20,7 @@ const Categories = () => {
     getGenres();
   }, []);
 
+
   const handleInputChange = (e) => {
     setCategoryName(e.target.value);
   };
@@ -78,10 +79,9 @@ const Categories = () => {
       <div className="mt-4">
         <ul className="list-group">
           {currentCategories.map((cat, index) => (
-            <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
-              {cat.bookGenre}
-              <button className="btn btn-danger">Delete</button>
-            </li>
+
+            <ListedCats key={index}  cat={cat} />
+            
           ))}
         </ul>
       </div>
@@ -107,5 +107,70 @@ const Categories = () => {
     </div>
   );
 };
+
+const ListedCats = ({cat}) => {
+  const state = useContext(GlobalState);
+  const token = state.token;
+  const[audios, setAudios] = useState([])
+  const[toDelete, setToDelete] = useState({})
+
+  useEffect(() => {
+
+    const getProds = async() => {
+const res = await axios.get("/audio/show_all")
+
+setAudios(res.data.books)
+ 
+
+    }
+
+    getProds()
+
+
+  }, [])
+
+
+  useEffect(() => {
+
+if(cat._id) {
+
+  audios.forEach((audio) => {
+ if(audio.audioGenre === cat._id) setToDelete(audio)
+
+  })
+
+}
+
+
+
+  }, [cat._id, audios])
+
+const deleteCat = async() => {
+
+  const res = await axios.delete(`/genre/delete_genre/${cat._id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  alert(res.data.msg)
+
+  window.location.href = "/categories"
+
+
+}
+
+  return(<>
+
+<li className="list-group-item d-flex justify-content-between align-items-center" >
+              {cat.bookGenre}
+        {toDelete.audioGenre === cat._id ?   "" :   <button className="btn btn-danger" onClick={deleteCat}>Delete</button> }
+            </li>
+  
+  
+  
+  </>)
+
+}
 
 export default Categories;
