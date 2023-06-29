@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Button, Pagination } from "react-bootstrap";
@@ -8,6 +9,8 @@ function SearchComponent() {
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsPerPage] = useState(5);
   const [typingTimeout, setTypingTimeout] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -27,6 +30,9 @@ function SearchComponent() {
       if (value.trim() === "") {
         setResults([]);
       } else {
+        setIsLoading(true);
+        setError(null);
+
         const response = await axios.get("/audio/show_all");
         const audioData = response.data.books;
 
@@ -43,7 +49,10 @@ function SearchComponent() {
         setCurrentPage(1);
       }
     } catch (error) {
+      setError("An error occurred while fetching search results.");
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -71,9 +80,13 @@ function SearchComponent() {
         placeholder="Search for audio books..."
       />
 
+      {error && <p className="text-danger">{error}</p>}
+
       {query && (
         <div>
-          {currentResults.length > 0 ? (
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : currentResults.length > 0 ? (
             currentResults.map((audio) => (
               <DisplayBooks key={audio._id} audio={audio} />
             ))
@@ -97,6 +110,9 @@ function SearchComponent() {
     </div>
   );
 }
+
+
+
 
 
 const DisplayBooks = ({audio}) => {
