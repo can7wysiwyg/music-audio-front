@@ -21,6 +21,7 @@ import AuthorSelector from "./components/admin/AuthorSelector";
 import BookUploadForm from "./components/admin/BookUploadForm";
 import Categories from "./components/admin/Categories";
 import AuthorsBooks from "./components/pages/AuthorsBooks";
+import SearchComponent from "./components/pages/SearchComponent";
 
 
 
@@ -52,6 +53,7 @@ function App() {
     <Route path="/book_upload_form/:id" element={ <BookUploadForm /> } />
     <Route path="/categories" element={ <Categories /> }  />
     <Route path="/authors_books/:id" element={ <AuthorsBooks /> } />
+    <Route path="/search_books" element={<SearchComponent /> } />
     
 
 

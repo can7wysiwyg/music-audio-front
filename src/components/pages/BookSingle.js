@@ -66,7 +66,7 @@ function BookSingle() {
   if (Object.keys(writer).length < 8) {
     return (
       <>
-        <h1 className="text-center">please wait as writer loads loads</h1>
+        <h1 className="text-center">please wait...</h1>
       </>
     );
   }
