@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Pagination } from "react-bootstrap";
 
 function SearchComponent() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [resultsPerPage] = useState(5);
   const [typingTimeout, setTypingTimeout] = useState(null);
 
   const handleInputChange = (event) => {
@@ -38,10 +40,19 @@ function SearchComponent() {
         });
 
         setResults(filteredResults);
+        setCurrentPage(1);
       }
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const indexOfLastResult = currentPage * resultsPerPage;
+  const indexOfFirstResult = indexOfLastResult - resultsPerPage;
+  const currentResults = results.slice(indexOfFirstResult, indexOfLastResult);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   useEffect(() => {
@@ -62,25 +73,83 @@ function SearchComponent() {
 
       {query && (
         <div>
-          {results.length > 0 ? (
-            results.map((audio) => (
-              <Card key={audio._id} className="mb-3">
-                <Card.Body>
-                  <Card.Title>{audio.bookTitle}</Card.Title>
-                  <Card.Text>Author: {audio.authorName}</Card.Text>
-                  <Button variant="primary" href={`/book_single/${audio._id}`}>
-                    View Details
-                  </Button>
-                </Card.Body>
-              </Card>
+          {currentResults.length > 0 ? (
+            currentResults.map((audio) => (
+              <DisplayBooks key={audio._id} audio={audio} />
             ))
           ) : (
             <p>No books found.</p>
           )}
+
+          <Pagination className="mt-3">
+            {Array.from(Array(Math.ceil(results.length / resultsPerPage)), (_, index) => (
+              <Pagination.Item
+                key={index + 1}
+                active={index + 1 === currentPage}
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </Pagination.Item>
+            ))}
+          </Pagination>
         </div>
       )}
     </div>
   );
 }
+
+
+const DisplayBooks = ({audio}) => {
+
+    const[results, setAuthors] = useState([])
+    const[newAuthors, setNew] = useState({})
+
+    useEffect(() => {
+
+        const getUsers = async() => {
+          
+            const res = await axios.get("/author/show_all")
+
+            setAuthors(res.data.authors)
+
+        }
+
+        getUsers()
+
+
+    }, [])
+
+    useEffect(() => {
+
+        if(audio.authorName) {
+
+            results.forEach((result) => {
+                if(result._id === audio.authorName) setNew(result)
+            })
+        }
+
+
+    }, [audio.authorName, results])
+
+    return(<>
+
+<Card   className="mb-3">
+                <Card.Body>
+                  <Card.Title>{audio.bookTitle}</Card.Title>
+                  <Card.Text>Author: {newAuthors.AuthorName}</Card.Text>
+                  <Button variant="primary" href={`/book_single/${audio._id}`}>
+                    View Details
+                  </Button>
+                </Card.Body>
+              </Card>
+
+    
+    
+    
+    
+    </>)
+}
+
+
 
 export default SearchComponent;
