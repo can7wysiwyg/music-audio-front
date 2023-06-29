@@ -10,7 +10,6 @@ import Contact from "./components/pages/Contact";
 import BookSingle from "./components/pages/BookSingle";
 import AuthorSingle from "./components/pages/AuthorSingle";
 import AuthorManagement from "./components/admin/AuthorManagement";
-import BookManagement from "./components/admin/BookManagement";
 import BookEdit from "./components/admin/BookEdit";
 import AuthorEdit from "./components/admin/AuthorEdit";
 import BookAccordingToCat from "./components/pages/BookAccordingToCat";
@@ -42,7 +41,6 @@ function App() {
     <Route path="/book_single/:id" element={<BookSingle />} />
     <Route path="/author_single/:id" element={<AuthorSingle />} />
     <Route path="/author_management" element={<AuthorManagement />} />
-    <Route path="/book_management" element={<BookManagement />} />
     <Route path="/book_edit" element={ <BookEdit /> } />
     <Route path="/author_edit" element={<AuthorEdit />} />
     <Route path="/book_cat/:id" element={<BookAccordingToCat />} />

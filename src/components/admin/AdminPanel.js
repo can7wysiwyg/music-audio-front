@@ -32,8 +32,8 @@ function AdminPanel() {
       </div>
       <div className="col-md-4">
         <div className="menu-card card-danger">
-          <h5 className="card-title">Book Management</h5>
-          <p className="card-text">Description for Menu Item 4</p>
+          <a href="/book_edit" className="card-title" style={{color: "black"}}>Book Management</a>
+          <p className="card-text" style={{color: "black"}}>Manage Books</p>
         </div>
 
       
