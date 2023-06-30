@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Modal, Row, Col, Pagination, Form } from 'react-bootstrap';
 import axios from 'axios';
+import { useContext } from 'react';
+import { GlobalState } from '../../GlobalState';
 
 function AuthorEdit() {
   const [results, setAuthors] = useState([]);
@@ -94,6 +96,8 @@ function AuthorEdit() {
 }
 
 const EditAuthors = ({ result }) => {
+ const state = useContext(GlobalState)
+ const token = state.token
   const [showModal, setShowModal] = useState(false);
 
   const handleEdit = () => {
@@ -103,6 +107,18 @@ const EditAuthors = ({ result }) => {
   const handleClose = () => {
     setShowModal(false);
   };
+
+  const handleDelete = async(event) => {
+    event.preventDefault()
+    await axios.delete(`/author//delete_author/${result._id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    window.location.href = '/author_edit'
+  }
+
 
   function ShowAuthors() {
     let imagePath = result.AuthorImage.authorImageLink.replace(/\\/g, '/'); // Convert backslashes to forward slashes
@@ -130,7 +146,7 @@ const EditAuthors = ({ result }) => {
                 <Button variant="primary" onClick={handleEdit}>
                   Edit
                 </Button>
-                <Button variant="danger">Delete</Button>
+                <Button variant="danger" onClick={handleDelete}>Delete</Button>
               </div>
             </Card.Body>
           </Card>
@@ -173,7 +189,7 @@ const EditAuthors = ({ result }) => {
                 <Button variant="primary" onClick={handleEdit}>
                   Edit
                 </Button>
-                <Button variant="danger">Delete</Button>
+                <Button variant="danger" onClick={handleDelete}>Delete</Button>
               </div>
             </Card.Body>
           </Card>
