@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./styles/booksingle.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import moment from "moment/moment";
 
 function BookSingle() {
   const { id } = useParams();
@@ -97,6 +98,7 @@ function BookSingle() {
             {/* <p>Author: {writer?.AuthorName}</p> */}
             <p>Genre: {genres.bookGenre} </p>
             <p>Description: {singleBook.bookDescription}</p>
+            <p>Released On: {moment(singleBook.released).format("MMM Do YYYY")}</p>
             <div className="audio-player">
               <audio controls>
                 <source src={audioUrl} type="audio/mpeg" />
@@ -131,6 +133,7 @@ function BookSingle() {
             {/* <p>Author: {writer?.AuthorName}</p> */}
             <p>Genre: {genres.bookGenre}</p>
             <p>Description: {singleBook.bookDescription}</p>
+            <p>Released On: {moment(singleBook.released).format("MMM Do YYYY") }</p>
             <div className="audio-player">
               <audio controls>
                 <source src={audioUrl} type="audio/mpeg" />
