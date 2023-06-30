@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
+import {GlobalState} from "../../GlobalState"
 import { Card, Button, Modal, Pagination, Row, Col } from 'react-bootstrap';
 
 function BookEdit() {
@@ -27,6 +28,13 @@ function BookEdit() {
   }, [])
 
 
+  if(items.length === 0) {
+    return(<>
+    <h1 className='text-center'>please wait....</h1>
+    </>)
+  }
+
+
 
 
   
@@ -42,8 +50,8 @@ function BookEdit() {
     <div className="book-list">
       <Row>
         {currentBooks.map((book) => (
-          <Col key={book.id} md={4}>
-               <BooksToEdit book={book} />
+          <Col key={book.id}  md={4}>
+               <BooksToEdit  book={book} />
 
                       </Col>
         ))}
@@ -67,8 +75,42 @@ function BookEdit() {
 }
 
 const BooksToEdit = ({book}) => {
+ const state = useContext(GlobalState)
+ const token = state.token
+ const [results, setAuthors] = useState([]);
+  const[newAuthor, setNew] = useState({})
 
-  // console.log(book);
+
+  useEffect(() => {
+
+    const getAuthors = async () => {
+      const res = await axios.get("/author/show_all");
+      setAuthors(res.data.authors);
+    };
+
+    getAuthors();
+
+
+
+
+  }, [])
+
+
+  useEffect(() => {
+
+    if(book.authorName) {
+      results.forEach((result) => {
+   if(result._id === book.authorName) setNew(result)
+
+      })
+    }
+
+
+  }, [book.authorName, results])
+
+  
+
+  
 
   const [showModal, setShowModal] = useState(false);
 
@@ -83,40 +125,55 @@ const BooksToEdit = ({book}) => {
   };
 
 
-  function showItems() {
+  const handleDelete = async() => {
 
+    await axios.delete(`/audio/delete_audio_book/${book._id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    window.location.href = '/book_edit'
+
+  }
+
+
+
+
+
+  function ShowingItems() {
     let audioPath = book.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
     let imagePath = book.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
 
-    console.log(imagePath);
-
-      
     if (audioPath.startsWith("uploads/")) {
       let audioUrl = `http://localhost:5000/${audioPath}`;
       let imageUrl = `http://localhost:5000/${imagePath}`;
 
-      
-
       return(<>
+      <Card className="book-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+  <div style={{ flex: 1 }}>
+    <Card.Img variant="top" src={imageUrl} alt="Book Cover"  />
+  </div>
+  <Card.Body style={{ flex: "auto", display: "flex", flexDirection: "column" }}>
+    <Card.Link href={`/book_single/${book._id}`} style={{textDecoration: "none"}} >{book.bookTitle}</Card.Link>
+    <Card.Text>{newAuthor.AuthorName}</Card.Text>
+    <Card.Text style={{ flex: 1 }}>{book.bookDescription}</Card.Text>
+    <audio controls>
+      <source src={audioUrl} type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <div className="btn-group">
+      <Button variant="primary" onClick={handleEdit}>
+        Edit
+      </Button>
+      <Button variant="danger" onClick={handleDelete}>Delete</Button>
+    </div>
+  </Card.Body>
+</Card>
+<br />
 
-<Card className="book-card">
-              <Card.Img variant="top" src={imageUrl} alt="Book Cover" />
-              <Card.Body>
-                <Card.Title>{book.bookTitle}</Card.Title>
-                <Card.Text>{book.authorName}</Card.Text>
-                <Card.Text>{book.bookDescription}</Card.Text>
-                <audio controls>
-                  <source src={audioUrl} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
-                <div className="btn-group">
-                  <Button variant="primary" onClick={handleEdit}>
-                    Edit
-                  </Button>
-                  <Button variant="danger">Delete</Button>
-                </div>
-              </Card.Body>
-            </Card>
+
+
 
 
             <Modal show={showModal} onHide={handleClose}>
@@ -124,15 +181,19 @@ const BooksToEdit = ({book}) => {
           <Modal.Title>Edit Book</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Edit the book's links:</p>
+        <p>Edit the book's info:</p>
           <ul>
             <li>
-              <a href="/">Website</a>
+              <a href={`/book_update_info/${book._id}`}>update book info</a>
             </li>
             <li>
-              <a href="/">Purchase</a>
+              <a href={`/book_update_audio/${book._id}`}>update book audio</a>
             </li>
-          </ul>
+            <li>
+              <a href={`/book_update_picture/${book._id}`}>update book picture</a>
+            </li>
+            </ul>
+          
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -140,45 +201,41 @@ const BooksToEdit = ({book}) => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-  
-  
-  
 
       
       </>)
 
-
-
-
     } else{
-      let audioUrl = `http://localhost:5000/${audioPath}`;
-      let imageUrl = `http://localhost:5000/${imagePath}`;
 
-      
+      let audioUrl = `http://localhost:5000${audioPath}`;
+      let imageUrl = `http://localhost:5000${imagePath}`;
 
-      
-    return(<>
+      return(<>
+
+<Card className="book-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+  <div style={{ flex: 1 }}>
+    <Card.Img variant="top" src={imageUrl} alt="Book Cover"  />
+  </div>
+  <Card.Body style={{ flex: "auto", display: "flex", flexDirection: "column" }}>
+  <Card.Link href={`/book_single/${book._id}`} style={{textDecoration: "none"}} >{book.bookTitle}</Card.Link>
+    <Card.Text>{newAuthor.AuthorName}</Card.Text>
+    <Card.Text style={{ flex: 1 }}>{book.bookDescription}</Card.Text>
+    <audio controls>
+      <source src={audioUrl} type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <div className="btn-group">
+      <Button variant="primary" onClick={handleEdit}>
+        Edit
+      </Button>
+      <Button variant="danger" onClick={handleDelete}>Delete</Button>
+    </div>
+  </Card.Body>
+</Card>
+
+<br />
 
 
-<Card className="book-card">
-              <Card.Img variant="top" src={imageUrl} alt="Book Cover" />
-              <Card.Body>
-                <Card.Title>{book.bookTitle}</Card.Title>
-                <Card.Text>{book.authorName}</Card.Text>
-                <Card.Text>{book.bookDescription}</Card.Text>
-                <audio controls>
-                  <source src={audioUrl} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
-                <div className="btn-group">
-                  <Button variant="primary" onClick={handleEdit}>
-                    Edit
-                  </Button>
-                  <Button variant="danger">Delete</Button>
-                </div>
-              </Card.Body>
-            </Card>
 
 
             <Modal show={showModal} onHide={handleClose}>
@@ -186,13 +243,16 @@ const BooksToEdit = ({book}) => {
           <Modal.Title>Edit Book</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Edit the book's links:</p>
+          <p>Edit the book's info:</p>
           <ul>
             <li>
-              <a href="/">Website</a>
+              <a href={`/book_update_info/${book._id}`}>update book info</a>
             </li>
             <li>
-              <a href="/">Purchase</a>
+              <a href={`/book_update_audio/${book._id}`}>update book audio</a>
+            </li>
+            <li>
+              <a href={`/book_update_picture/${book._id}`}>update book picture</a>
             </li>
           </ul>
         </Modal.Body>
@@ -203,18 +263,13 @@ const BooksToEdit = ({book}) => {
         </Modal.Footer>
       </Modal>
 
+      
+      
+      
+      
+      
+      </>)
   
-  
-  
-
-    
-    
-    
-    
-    
-    </>)
-
-
 
 
     }
@@ -226,15 +281,16 @@ const BooksToEdit = ({book}) => {
 
 
 
- 
-
   return(<>
 
 {
-  showItems()
+  ShowingItems()
 }
+
   
   </>)
 }
 
-export default BookEdit;
+
+
+export default  BookEdit
