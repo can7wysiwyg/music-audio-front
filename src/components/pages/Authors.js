@@ -1,15 +1,18 @@
 import axios from "axios";
 import "./styles/authors.css";
 import { useState, useEffect } from "react";
+import { Row, Col, Pagination, Form, Container } from 'react-bootstrap';
+
 
 function Authors() {
   const [results, setAuthors] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [authorsPerPage] = useState(6);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const getAuthors = async () => {
-      const res = await axios.get("/author/show_all");
+      const res = await axios.get('/author/show_all');
       setAuthors(res.data.authors);
     };
 
@@ -27,36 +30,65 @@ function Authors() {
   // Pagination logic
   const indexOfLastAuthor = currentPage * authorsPerPage;
   const indexOfFirstAuthor = indexOfLastAuthor - authorsPerPage;
-  const currentAuthors = results.slice(indexOfFirstAuthor, indexOfLastAuthor);
+  // const currentAuthors = results.slice(indexOfFirstAuthor, indexOfLastAuthor);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1);
+  };
+
+  // Filter authors based on search term
+  const filteredAuthors = results.filter((author) =>
+    author.AuthorName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Update current authors based on search results
+  const currentAuthorsFiltered = filteredAuthors.slice(indexOfFirstAuthor, indexOfLastAuthor);
+
   return (
-    <div className="container">
-      <div className="row">
-        {currentAuthors.map((result, index) => (
-          <div key={index} className="col-md-4">
-            <DisplayAuthors result={result} />
-          </div>
-        ))}
+    <Container>
+      <div  className="container d-flex justify-content-center align-items-center " >
+      <div className="col-md-6">
+        <Form>
+          <Form.Group className="d-flex justify-content-center">
+            <Form.Control
+              type="text"
+              placeholder="Search Authors"
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+          </Form.Group>
+        </Form>
+        </div>
       </div>
 
+      <br />
+
+      <Row>
+        {currentAuthorsFiltered.map((result, index) => (
+          <Col key={index} md={4}>
+            <DisplayAuthors result={result} />
+          </Col>
+        ))}
+      </Row>
+
       {/* Pagination */}
-      <nav className="mt-4">
-        <ul className="pagination justify-content-center">
-          {Array.from({ length: Math.ceil(results.length / authorsPerPage) }).map((_, index) => (
-            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-              <button className="page-link" onClick={() => paginate(index + 1)}>
-                {index + 1}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+      <Pagination className="mt-4 justify-content-center">
+        {Array.from({ length: Math.ceil(filteredAuthors.length / authorsPerPage) }).map((_, index) => (
+          <Pagination.Item
+            key={index}
+            active={currentPage === index + 1}
+            onClick={() => paginate(index + 1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
+      </Pagination>
+    </Container>
   );
 }
-
 
 
 const DisplayAuthors = ({ result }) => {

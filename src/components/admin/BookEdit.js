@@ -50,7 +50,7 @@ function BookEdit() {
     <div className="book-list">
       <Row>
         {currentBooks.map((book) => (
-          <Col key={book.id}  md={4}>
+          <Col key={book._id}  md={4}>
                <BooksToEdit  book={book} />
 
                       </Col>

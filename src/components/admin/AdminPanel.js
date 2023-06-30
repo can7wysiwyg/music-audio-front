@@ -26,8 +26,8 @@ function AdminPanel() {
       {/*  */}
       <div className="col-md-4">
         <div className="menu-card card-success">
-          <h5 className="card-title">Author Management</h5>
-          <p className="card-text">Description for Menu Item 3</p>
+          <a href="/author_edit" className="card-title" style={{color: "black"}}>Author Management</a>
+          <p className="card-text" style={{color: "black"}}>Manage Authors</p>
         </div>
       </div>
       <div className="col-md-4">

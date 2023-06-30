@@ -6,6 +6,8 @@ function Books() {
   const [audios, setAudios] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [audiosPerPage] = useState(6);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     const getBooks = async () => {
@@ -15,6 +17,14 @@ function Books() {
 
     getBooks();
   }, []);
+
+  useEffect(() => {
+    // Perform the search logic here
+    const filteredResults = audios.filter((audio) =>
+      audio.bookTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(filteredResults);
+  }, [searchTerm, audios]);
 
   if (audios.length === 0) {
     return (
@@ -27,13 +37,32 @@ function Books() {
   // Pagination logic
   const indexOfLastAudio = currentPage * audiosPerPage;
   const indexOfFirstAudio = indexOfLastAudio - audiosPerPage;
-  const currentAudios = audios.slice(indexOfFirstAudio, indexOfLastAudio);
+  const currentAudios = searchTerm !== "" ? searchResults : audios.slice(indexOfFirstAudio, indexOfLastAudio);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const handleSearch = (event) => {
+    const { value } = event.target;
+    setSearchTerm(value);
+  };
+
   return (
     <>
-      <div className="container">
+      <div  className="container d-flex justify-content-center align-items-center " >
+      <div className="col-md-6">
+          <input
+            type="text"
+            placeholder="Search by book title..."
+            value={searchTerm}
+            className="form-control"
+            onChange={handleSearch}
+          />
+        </div>
+        </div>
+        <br />
+        
+
+
         <div className="row">
           {currentAudios?.map((audioItem, index) => (
             <div key={index} className="col-md-4">
@@ -41,7 +70,7 @@ function Books() {
             </div>
           ))}
         </div>
-      </div>
+  
 
       {/* Pagination */}
       <nav className="mt-4">
@@ -59,45 +88,29 @@ function Books() {
   );
 }
 
-
-
-
 const DisplayBooks = ({ audioItem }) => {
-
-  
-
-  const[writers, setWriters] = useState([])
-  const[newWriters, setNewWriters] = useState({})
+  const [writers, setWriters] = useState([]);
+  const [newWriters, setNewWriters] = useState({});
 
   useEffect(() => {
-
-    const getAuthors = async() => {
+    const getAuthors = async () => {
       const res = await axios.get("/author/show_all");
       setWriters(res.data.authors);
+    };
 
-    }
-
-    getAuthors()
-
-  }, [])
-
-  
+    getAuthors();
+  }, []);
 
   useEffect(() => {
-    if(audioItem.authorName) {
-
+    if (audioItem.authorName) {
       writers.forEach((writer) => {
-        if(writer._id === audioItem.authorName) {
-          setNewWriters(writer)
-
+        if (writer._id === audioItem.authorName) {
+          setNewWriters(writer);
         }
-      })
-
+      });
     }
+  }, [audioItem.authorName, writers]);
 
-  }, [audioItem.authorName, writers])
-
-  
   function listBooksDisplay() {
     let audioPath = audioItem.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
     let imagePath = audioItem.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
@@ -108,72 +121,56 @@ const DisplayBooks = ({ audioItem }) => {
 
       return (
         <>
+          <div className="book-card">
+            <div className="image-container">
+              <img className="book-image" src={imageUrl} alt="Book 1" />
+            </div>
 
-<div className="book-card">
-  <div className="image-container">
-    <img className="book-image" src={imageUrl} alt="Book 1" />
-  </div>
-
-  <div className="card-content">
-    <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }}>{audioItem.bookTitle}</a>
-    <p className="card-text">{newWriters.AuthorName}</p>
-    <div className="audio-container">
-      <audio controls>
-        <source src={audioUrl} type="audio/mpeg" />
-      </audio>
-    </div>
-  </div>
-</div>
-<br />
-
-   
-          
+            <div className="card-content">
+              <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }}>
+                {audioItem.bookTitle}
+              </a>
+              <p className="card-text">{newWriters.AuthorName}</p>
+              <div className="audio-container">
+                <audio controls>
+                  <source src={audioUrl} type="audio/mpeg" />
+                </audio>
+              </div>
+            </div>
+          </div>
+          <br />
         </>
       );
-    } else{
+    } else {
       let audioUrl = `http://localhost:5000${audioPath}`;
-    let imageUrl = `http://localhost:5000${imagePath}`;
+      let imageUrl = `http://localhost:5000${imagePath}`;
 
-    return (
-      <>
+      return (
+        <>
+          <div className="book-card">
+            <div className="image-container">
+              <img className="book-image" src={imageUrl} alt="Book 1" />
+            </div>
 
-<div className="book-card">
-  <div className="image-container">
-    <img className="book-image" src={imageUrl} alt="Book 1" />
-  </div>
-
-  <div className="card-content">
-    <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }}>{audioItem.bookTitle}</a>
-    <p className="card-text">{newWriters.AuthorName}</p>
-    <div className="audio-container">
-      <audio controls>
-        <source src={audioUrl} type="audio/mpeg" />
-      </audio>
-    </div>
-  </div>
-</div>
-<br />
-
-      
-        
-      </>
-    );
-
-
+            <div className="card-content">
+              <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }}>
+                {audioItem.bookTitle}
+              </a>
+              <p className="card-text">{newWriters.AuthorName}</p>
+              <div className="audio-container">
+                <audio controls>
+                  <source src={audioUrl} type="audio/mpeg" />
+                </audio>
+              </div>
+            </div>
+          </div>
+          <br />
+        </>
+      );
     }
   }
 
-  return( <>
-
-  
-  
-  
-  {listBooksDisplay()}
-  
-  
-  
-  </>)
+  return <>{listBooksDisplay()}</>;
 };
 
 export default Books;
-
