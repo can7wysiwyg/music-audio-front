@@ -21,6 +21,10 @@ import BookUploadForm from "./components/admin/BookUploadForm";
 import Categories from "./components/admin/Categories";
 import AuthorsBooks from "./components/pages/AuthorsBooks";
 import SearchComponent from "./components/pages/SearchComponent";
+import UpdateList from "./components/admin/UpdateList";
+import BookDateUpdate from "./components/admin/BookDateUpdate";
+import BookDescriptionUpdate from "./components/admin/BookDescriptionUpdate";
+import BookTitleUpdate from "./components/admin/BookTitleUpdate";
 
 
 
@@ -52,6 +56,10 @@ function App() {
     <Route path="/categories" element={ <Categories /> }  />
     <Route path="/authors_books/:id" element={ <AuthorsBooks /> } />
     <Route path="/search_books" element={<SearchComponent /> } />
+    <Route path="/book_update_info/:id" element={<UpdateList /> } />
+    <Route path="/book_release/:id" element={ <BookDateUpdate /> } />
+    <Route path="/book_description/:id" element={<BookDescriptionUpdate />} />
+    <Route path="/book_title/:id" element={<BookTitleUpdate />} />
     
 
 
