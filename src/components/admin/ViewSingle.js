@@ -163,7 +163,7 @@ function ViewSingle() {
                   <a href={`/book_delete_all/${author._id}`}>Delete All Books At Once</a>
                 </li>
                 <li>
-                  <a href={`/authorz_books/${author._id}`}>Delete Select Books</a>
+                  <a href={`/authors_books/${author._id}`}>Delete Select Books</a>
                 </li>
               </ul>
               
@@ -252,7 +252,7 @@ function ViewSingle() {
                   <a href={`/book_delete_all/${author._id}`}>Delete All Books At Once</a>
                 </li>
                 <li>
-                  <a href={`/authorz_books/${author._id}`}>Delete Select Books</a>
+                  <a href={`/authors_books/${author._id}`}>Delete Select Books</a>
                 </li>
               </ul>
               
