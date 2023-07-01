@@ -2,9 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import "./styles/authorsingle.css"
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useContext } from 'react';
+import { GlobalState } from '../../GlobalState';
 
 function AuthorSingle() {
     const{id} = useParams()
+    const state = useContext(GlobalState)
+    const[isLogged] = state.userApi.isLogged
+    const[isAdmin] = state.userApi.isAdmin
     const [fadeIn, setFadeIn] = useState(false);
     const[writer, setWriter] = useState([])
     const authorDetailsRef = useRef(null);
@@ -53,7 +58,8 @@ function AuthorSingle() {
       <img src={imageUrl} alt="Author Avatar" />
       <p className='text-dark'> location: {writer.AuthorLocation}</p>
       <p className='text-dark '>email: {writer.AuthorEmail}</p>
-      <p>Website: <a href="https://www.authorwebsite.com">www.authorwebsite.com</a></p>
+      <p className='text-dark '>email: {writer.AuthorPhoneNumber}</p>
+      { isLogged === true && isAdmin === true ? <a href={`/view_single/${writer._id}`} style={{color: "blue"}}>show user</a> : "" }
       <div className="social-icons">
         <a href="/"><i className="fab fa-facebook"></i></a>
         <a href="/"><i className="fab fa-twitter"></i></a>
@@ -88,7 +94,9 @@ function AuthorSingle() {
       <img src={imageUrl} alt="Author Avatar" />
       <p className='text-dark'>location: {writer.AuthorLocation}</p>
       <p className='text-dark'>email: {writer.AuthorEmail}</p>
-      <p>Website: <a href="https://www.authorwebsite.com">www.authorwebsite.com</a></p>
+      <p className='text-dark '>email: {writer.AuthorPhoneNumber}</p>
+      { isLogged === true && isAdmin === true ? <a href={`/view_single/${writer._id}`} style={{color: "blue"}}>show user</a> : "" }
+
       <div className="social-icons">
         <a href="/"><i className="fab fa-facebook"></i></a>
         <a href="/"><i className="fab fa-twitter"></i></a>

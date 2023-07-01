@@ -29,6 +29,7 @@ import AuthorNameEdit from "./components/admin/AuthorNameEdit";
 import AuthorEmailEdit from "./components/admin/AuthorEmailEdit";
 import AuthorLocationEdit from "./components/admin/AuthorLocationEdit";
 import AuthorPhoneEdit from "./components/admin/AuthorPhoneEdit";
+import ViewSingle from "./components/admin/ViewSingle";
 
 
 
@@ -68,6 +69,7 @@ function App() {
     <Route path="/author_email/:id" element={<AuthorEmailEdit />} />
     <Route path="/author_location/:id"  element={<AuthorLocationEdit />} />
     <Route path="/author_phone/:id" element={<AuthorPhoneEdit />} />
+    <Route path="/view_single/:id" element={<ViewSingle />} />
     
 
 
