@@ -219,7 +219,7 @@ const EditAuthors = ({ result }) => {
                   <a href={`/book_delete_all/${result._id}`}>Delete All Books At Once</a>
                 </li>
                 <li>
-                  <a href="/">Delete Select Books</a>
+                  <a href={`/authorz_books/${result._id}`}>Delete Select Books</a>
                 </li>
               </ul>
               
@@ -300,7 +300,7 @@ const EditAuthors = ({ result }) => {
                   <a href={`/book_delete_all/${result._id}`}>Delete All Books At Once</a>
                 </li>
                 <li>
-                  <a href="/">Delete Select Books</a>
+                  <a href={`/authorz_books/${result._id}`}>Delete Select Books</a>
                 </li>
               </ul>
               

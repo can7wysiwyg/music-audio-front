@@ -30,6 +30,7 @@ import AuthorEmailEdit from "./components/admin/AuthorEmailEdit";
 import AuthorLocationEdit from "./components/admin/AuthorLocationEdit";
 import AuthorPhoneEdit from "./components/admin/AuthorPhoneEdit";
 import ViewSingle from "./components/admin/ViewSingle";
+import BookDeleteAll from "./components/admin/BookDeleteAll";
 
 
 
@@ -70,6 +71,7 @@ function App() {
     <Route path="/author_location/:id"  element={<AuthorLocationEdit />} />
     <Route path="/author_phone/:id" element={<AuthorPhoneEdit />} />
     <Route path="/view_single/:id" element={<ViewSingle />} />
+    <Route path="/book_delete_all/:id" element={ <BookDeleteAll /> } />
     
     
 
