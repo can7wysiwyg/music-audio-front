@@ -24,6 +24,11 @@ import UpdateList from "./components/admin/UpdateList";
 import BookDateUpdate from "./components/admin/BookDateUpdate";
 import BookDescriptionUpdate from "./components/admin/BookDescriptionUpdate";
 import BookTitleUpdate from "./components/admin/BookTitleUpdate";
+import EditUserInfo from "./components/admin/EditUserInfo";
+import AuthorNameEdit from "./components/admin/AuthorNameEdit";
+import AuthorEmailEdit from "./components/admin/AuthorEmailEdit";
+import AuthorLocationEdit from "./components/admin/AuthorLocationEdit";
+import AuthorPhoneEdit from "./components/admin/AuthorPhoneEdit";
 
 
 
@@ -43,7 +48,7 @@ function App() {
     <Route path="/contact" element={<Contact />} />
     <Route path="/book_single/:id" element={<BookSingle />} />
     <Route path="/author_single/:id" element={<AuthorSingle />} />
-    
+    <Route path="/edit_info/:id" element={<EditUserInfo />} />
     <Route path="/book_edit" element={ <BookEdit /> } />
     <Route path="/author_edit" element={<AuthorEdit />} />
     <Route path="/book_cat/:id" element={<BookAccordingToCat />} />
@@ -59,6 +64,10 @@ function App() {
     <Route path="/book_release/:id" element={ <BookDateUpdate /> } />
     <Route path="/book_description/:id" element={<BookDescriptionUpdate />} />
     <Route path="/book_title/:id" element={<BookTitleUpdate />} />
+    <Route path="/author_name/:id" element={<AuthorNameEdit /> } />
+    <Route path="/author_email/:id" element={<AuthorEmailEdit />} />
+    <Route path="/author_location/:id"  element={<AuthorLocationEdit />} />
+    <Route path="/author_phone/:id" element={<AuthorPhoneEdit />} />
     
 
 

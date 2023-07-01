@@ -95,30 +95,55 @@ function AuthorEdit() {
   );
 }
 
+
 const EditAuthors = ({ result }) => {
- const state = useContext(GlobalState)
- const token = state.token
+  const state = useContext(GlobalState);
+  const token = state.token;
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [content, setBooks] = useState([]);
+  const [filterDelete, setFilter] = useState({});
+
+  useEffect(() => {
+    const getBooks = async () => {
+      const res = await axios.get('/audio/show_all');
+      setBooks(res.data.books);
+    };
+
+    getBooks();
+  }, []);
+
+  useEffect(() => {
+    if (result._id) {
+      content.forEach((item) => {
+        if (item.authorName === result._id) setFilter(item);
+      });
+    }
+  }, [result._id, content]);
 
   const handleEdit = () => {
     setShowModal(true);
   };
 
-  const handleClose = () => {
-    setShowModal(false);
+  const handleAction = () => {
+    setShowDeleteModal(true);
   };
 
-  const handleDelete = async(event) => {
-    event.preventDefault()
-    await axios.delete(`/author//delete_author/${result._id}`, {
+  const handleClose = () => {
+    setShowModal(false);
+    setShowDeleteModal(false);
+  };
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    await axios.delete(`/author/delete_author/${result._id}`, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-    window.location.href = '/author_edit'
-  }
-
+    window.location.href = '/author_edit';
+  };
 
   function ShowAuthors() {
     let imagePath = result.AuthorImage.authorImageLink.replace(/\\/g, '/'); // Convert backslashes to forward slashes
@@ -142,11 +167,20 @@ const EditAuthors = ({ result }) => {
                 <Card.Title>{result.AuthorName}</Card.Title>
                 <Card.Link href={`/author_single/${result._id}`}>More Info</Card.Link>
               </div>
+              <pre> </pre>
               <div className="btn-group">
                 <Button variant="primary" onClick={handleEdit}>
                   Edit
                 </Button>
-                <Button variant="danger" onClick={handleDelete}>Delete</Button>
+                {filterDelete.authorName === result._id ? (
+                  <Button variant="secondary" onClick={handleAction}>
+                    Choose Action
+                  </Button>
+                ) : (
+                  <Button variant="danger" onClick={handleDelete}>
+                    Delete
+                  </Button>
+                )}
               </div>
             </Card.Body>
           </Card>
@@ -157,13 +191,13 @@ const EditAuthors = ({ result }) => {
               <Modal.Title>Edit Author</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <p>Edit the author's links:</p>
+              <p>Choose Action:</p>
               <ul>
                 <li>
-                  <a href="/">Website</a>
+                  <a href={`/edit_info/${result._id}`}>Edit User Info</a>
                 </li>
                 <li>
-                  <a href="/">Social Media</a>
+                  <a href={`/update_user_image/${result._id}`}>Update Photo</a>
                 </li>
               </ul>
             </Modal.Body>
@@ -171,6 +205,32 @@ const EditAuthors = ({ result }) => {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
+            </Modal.Footer>
+          </Modal>
+
+          <Modal show={showDeleteModal} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>This Author Has Books, So Delete The Books First..</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+               <p>Choose Action:</p>
+              <ul>
+                <li>
+                  <a href={`/book_delete_all/${result._id}`}>Delete All Books At Once</a>
+                </li>
+                <li>
+                  <a href="/">Delete Select Books</a>
+                </li>
+              </ul>
+              
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Cancel
+              </Button>
+              {/* <Button variant="danger" onClick={handleDelete}>
+                Delete
+              </Button> */}
             </Modal.Footer>
           </Modal>
         </>
@@ -189,7 +249,19 @@ const EditAuthors = ({ result }) => {
                 <Button variant="primary" onClick={handleEdit}>
                   Edit
                 </Button>
-                <Button variant="danger" onClick={handleDelete}>Delete</Button>
+                
+                 {filterDelete.authorName === result._id ? (
+                  <Button variant="secondary" onClick={handleAction}>
+                    Choose Action
+                  </Button>
+                ) : (
+                  <Button variant="danger" onClick={handleDelete}>
+                    Delete
+                  </Button>
+                )}
+
+ 
+
               </div>
             </Card.Body>
           </Card>
@@ -200,13 +272,13 @@ const EditAuthors = ({ result }) => {
               <Modal.Title>Edit Author</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <p>Edit the author's links:</p>
+              <p>Choose Action:</p>
               <ul>
                 <li>
-                  <a href="/">Website</a>
+                  <a href={`/edit_info/${result._id}`}>Edit User Info</a>
                 </li>
                 <li>
-                  <a href="/">Social Media</a>
+                  <a href={`/update_user_image/${result._id}`}>Update Photo</a>
                 </li>
               </ul>
             </Modal.Body>
@@ -216,6 +288,34 @@ const EditAuthors = ({ result }) => {
               </Button>
             </Modal.Footer>
           </Modal>
+
+           <Modal show={showDeleteModal} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>This Author Has Books, So Delete The Books First..</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+               <p>Choose Action:</p>
+              <ul>
+                <li>
+                  <a href={`/book_delete_all/${result._id}`}>Delete All Books At Once</a>
+                </li>
+                <li>
+                  <a href="/">Delete Select Books</a>
+                </li>
+              </ul>
+              
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Cancel
+              </Button>
+              {/* <Button variant="danger" onClick={handleDelete}>
+                Delete
+              </Button> */}
+            </Modal.Footer>
+          </Modal>
+
+
         </>
       );
     }
@@ -223,5 +323,8 @@ const EditAuthors = ({ result }) => {
 
   return <>{ShowAuthors()}</>;
 };
+
+
+
 
 export default AuthorEdit;
