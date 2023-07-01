@@ -50,28 +50,26 @@ function AuthorSingle() {
 
       return (
         <>
-        <div
-      className={`author-details ${fadeIn ? 'fade-in' : ''}`}
-      ref={authorDetailsRef}>
+        <div className={`author-details ${fadeIn ? 'fade-in' : ''}`} ref={authorDetailsRef}>
+  <h2>{writer.AuthorName}</h2>
+  <img src={imageUrl} alt="Author Avatar" />
+  <p className="text-dark">location: {writer.AuthorLocation}</p>
+  <p className="text-dark">email: {writer.AuthorEmail}</p>
+  <p className="text-dark">phone number: {writer.AuthorPhoneNumber}</p>
+  {isLogged === true && isAdmin === true ? (
+    <a href={`/view_single/${writer._id}`} style={{ color: "blue" }}>manage user</a>
+  ) : (
+    ""
+  )}
+  <div className="social-icons">
+    <a href="/"><i className="fab fa-facebook"></i></a>
+    <a href="/"><i className="fab fa-twitter"></i></a>
+    <a href="/"><i className="fab fa-instagram"></i></a>
+    <a href="/"><i className="fab fa-linkedin"></i></a>
+  </div>
+</div>
 
-<h2>{ writer.AuthorName }</h2>
-      <img src={imageUrl} alt="Author Avatar" />
-      <p className='text-dark'> location: {writer.AuthorLocation}</p>
-      <p className='text-dark '>email: {writer.AuthorEmail}</p>
-      <p className='text-dark '>email: {writer.AuthorPhoneNumber}</p>
-      { isLogged === true && isAdmin === true ? <a href={`/view_single/${writer._id}`} style={{color: "blue"}}>show user</a> : "" }
-      <div className="social-icons">
-        <a href="/"><i className="fab fa-facebook"></i></a>
-        <a href="/"><i className="fab fa-twitter"></i></a>
-        <a href="/"><i className="fab fa-instagram"></i></a>
-        <a href="/"><i className="fab fa-linkedin"></i></a>
-      </div>
-
-
-
-
-    </div>
-
+        
 
         </>)
 
@@ -86,28 +84,26 @@ function AuthorSingle() {
       return (
         <>
 
-<div
-      className={`author-details ${fadeIn ? 'fade-in' : ''}`}
-      ref={authorDetailsRef}>
+<div className={`author-details ${fadeIn ? 'fade-in' : ''}`} ref={authorDetailsRef}>
+  <h2>{writer.AuthorName}</h2>
+  <img src={imageUrl} alt="Author Avatar" />
+  <p className="text-dark">location: {writer.AuthorLocation}</p>
+  <p className="text-dark">email: {writer.AuthorEmail}</p>
+  <p className="text-dark">phone number: {writer.AuthorPhoneNumber}</p>
+  {isLogged === true && isAdmin === true ? (
+    <a href={`/view_single/${writer._id}`} style={{ color: "blue" }}>manage user</a>
+  ) : (
+    ""
+  )}
+  <div className="social-icons">
+    <a href="/"><i className="fab fa-facebook"></i></a>
+    <a href="/"><i className="fab fa-twitter"></i></a>
+    <a href="/"><i className="fab fa-instagram"></i></a>
+    <a href="/"><i className="fab fa-linkedin"></i></a>
+  </div>
+</div>
 
-<h2>{ writer.AuthorName }</h2>
-      <img src={imageUrl} alt="Author Avatar" />
-      <p className='text-dark'>location: {writer.AuthorLocation}</p>
-      <p className='text-dark'>email: {writer.AuthorEmail}</p>
-      <p className='text-dark '>email: {writer.AuthorPhoneNumber}</p>
-      { isLogged === true && isAdmin === true ? <a href={`/view_single/${writer._id}`} style={{color: "blue"}}>show user</a> : "" }
 
-      <div className="social-icons">
-        <a href="/"><i className="fab fa-facebook"></i></a>
-        <a href="/"><i className="fab fa-twitter"></i></a>
-        <a href="/"><i className="fab fa-instagram"></i></a>
-        <a href="/"><i className="fab fa-linkedin"></i></a>
-      </div>
-
-
-
-
-    </div>
 
 
 

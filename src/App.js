@@ -71,6 +71,7 @@ function App() {
     <Route path="/author_phone/:id" element={<AuthorPhoneEdit />} />
     <Route path="/view_single/:id" element={<ViewSingle />} />
     
+    
 
 
       </Routes>

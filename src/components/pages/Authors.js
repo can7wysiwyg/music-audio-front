@@ -135,7 +135,7 @@ const DisplayAuthors = ({ result }) => {
                   style={{ color: "blue" }}
                   
                 >
-                  show user
+                  manage user
                 </a> </p>
               ) : (
                 ""
@@ -184,7 +184,7 @@ const DisplayAuthors = ({ result }) => {
                   style={{ color: "blue" }}
                   
                 >
-                  show user
+                  manage user
                 </a> </p>
               ) : (
                 ""
