@@ -31,6 +31,7 @@ import AuthorLocationEdit from "./components/admin/AuthorLocationEdit";
 import AuthorPhoneEdit from "./components/admin/AuthorPhoneEdit";
 import ViewSingle from "./components/admin/ViewSingle";
 import BookDeleteAll from "./components/admin/BookDeleteAll";
+import ViewSingleBook from "./components/admin/ViewSingleBook";
 
 
 
@@ -72,6 +73,7 @@ function App() {
     <Route path="/author_phone/:id" element={<AuthorPhoneEdit />} />
     <Route path="/view_single/:id" element={<ViewSingle />} />
     <Route path="/book_delete_all/:id" element={ <BookDeleteAll /> } />
+    <Route path="/view_single_book/:id" element={<ViewSingleBook /> } />
     
     
 

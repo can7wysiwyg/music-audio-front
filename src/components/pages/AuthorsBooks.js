@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import "./styles/books.css";
+import { useContext } from "react";
+import { GlobalState } from "../../GlobalState";
+
 
 const AuthorsBooks = () => {
   const { id } = useParams();
@@ -67,6 +70,10 @@ const AuthorsBooks = () => {
 
 const MyBooks = ({result, id}) => {
     const[writer, setWriter] = useState([])
+    const state = useContext(GlobalState);
+   const [isLogged] = state.userApi.isLogged;
+   const[isAdmin] = state.userApi.isAdmin
+
 
     useEffect(() => {
         const getAuthors = async () => {
@@ -100,6 +107,7 @@ const MyBooks = ({result, id}) => {
       <div className="card-content">
         <a href={`/book_single/${result._id}`} style={{ textDecoration: "none" }}>{result.bookTitle}</a>
         <p className="card-text">{writer.AuthorName}</p>
+        { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${result._id}`}> manage book</a></p> : "" }
         <div className="audio-container">
           <audio controls>
             <source src={audioUrl} type="audio/mpeg" />
@@ -128,6 +136,7 @@ const MyBooks = ({result, id}) => {
       <div className="card-content">
         <a href={`/book_single/${result._id}`} style={{ textDecoration: "none" }}>{result.bookTitle}</a>
         <p className="card-text">{writer.AuthorName}</p>
+       { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${result._id}`}> manage book</a></p> : "" }
         <div className="audio-container">
           <audio controls>
             <source src={audioUrl} type="audio/mpeg" />

@@ -3,6 +3,9 @@ import "./styles/booksingle.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import moment from "moment/moment";
+import { useContext } from "react";
+import { GlobalState } from "../../GlobalState";
+
 
 function BookSingle() {
   const { id } = useParams();
@@ -12,6 +15,10 @@ function BookSingle() {
   const [categories, setCategories] = useState([]);
   const [genres, setGenre] = useState({});
   const bookDetailsRef = useRef(null);
+  const state = useContext(GlobalState)
+  const [isLogged] = state.userApi.isLogged;
+   const[isAdmin] = state.userApi.isAdmin
+
 
   useEffect(() => {
     const getSingleBook = async () => {
@@ -99,6 +106,7 @@ function BookSingle() {
             <p>Genre: {genres.bookGenre} </p>
             <p>Description: {singleBook.bookDescription}</p>
             <p>Released On: {moment(singleBook.released).format("MMM Do YYYY")}</p>
+            { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${singleBook._id}`}> manage book</a></p> : "" }
             <div className="audio-player">
               <audio controls>
                 <source src={audioUrl} type="audio/mpeg" />
@@ -134,6 +142,7 @@ function BookSingle() {
             <p>Genre: {genres.bookGenre}</p>
             <p>Description: {singleBook.bookDescription}</p>
             <p>Released On: {moment(singleBook.released).format("MMM Do YYYY") }</p>
+            { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${singleBook._id}`}> manage book</a></p> : "" }
             <div className="audio-player">
               <audio controls>
                 <source src={audioUrl} type="audio/mpeg" />

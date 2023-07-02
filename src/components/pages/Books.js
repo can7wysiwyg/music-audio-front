@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import "./styles/books.css";
 import axios from "axios";
+import { useContext } from "react";
+import { GlobalState } from "../../GlobalState";
+
 
 function Books() {
   const [audios, setAudios] = useState([]);
@@ -91,6 +94,10 @@ function Books() {
 const DisplayBooks = ({ audioItem }) => {
   const [writers, setWriters] = useState([]);
   const [newWriters, setNewWriters] = useState({});
+  const state = useContext(GlobalState)
+  const [isLogged] = state.userApi.isLogged;
+   const[isAdmin] = state.userApi.isAdmin
+
 
   useEffect(() => {
     const getAuthors = async () => {
@@ -131,6 +138,7 @@ const DisplayBooks = ({ audioItem }) => {
                 {audioItem.bookTitle}
               </a>
               <p className="card-text">{newWriters.AuthorName}</p>
+              { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${audioItem._id}`}> manage book</a></p> : "" }
               <div className="audio-container">
                 <audio controls>
                   <source src={audioUrl} type="audio/mpeg" />
@@ -157,6 +165,7 @@ const DisplayBooks = ({ audioItem }) => {
                 {audioItem.bookTitle}
               </a>
               <p className="card-text">{newWriters.AuthorName}</p>
+              { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${audioItem._id}`}> manage book</a></p> : "" }
               <div className="audio-container">
                 <audio controls>
                   <source src={audioUrl} type="audio/mpeg" />
