@@ -79,14 +79,20 @@ function BookSingle() {
     );
   }
 
+  
+
   function singleBookDisplay() {
-    let audioPath = singleBook.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
-    let imagePath = singleBook.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
 
-    if (audioPath.startsWith("uploads/")) {
-      let audioUrl = `http://localhost:5000/${audioPath}`;
-      let imageUrl = `http://localhost:5000/${imagePath}`;
+    const baseUrl = "http://localhost:5000";
+        let audioPath = singleBook.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
+        let imagePath = singleBook.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
+      
+        
+        if (audioPath.startsWith("uploads/") || audioPath.startsWith("/uploads/")) {
+          const audioUrl = audioPath.startsWith("/") ? `${baseUrl}${audioPath}` : `${baseUrl}/${audioPath}`;
+          const imageUrl = imagePath.startsWith("/") ? `${baseUrl}${imagePath}` : `${baseUrl}/${imagePath}`;
 
+   
       return (
         <>
           <div
@@ -120,9 +126,9 @@ function BookSingle() {
         </>
       );
     } else {
-      let audioUrl = `http://localhost:5000${audioPath}`;
-      let imageUrl = `http://localhost:5000/${imagePath}`;
-
+      let audioUrl = `${baseUrl}/${audioPath}`;
+      let imageUrl = `${baseUrl}/${imagePath}`;
+  
       return (
         <>
           <div

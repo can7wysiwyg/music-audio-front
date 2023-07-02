@@ -13,7 +13,6 @@ import BookEdit from "./components/admin/BookEdit";
 import AuthorEdit from "./components/admin/AuthorEdit";
 import BookAccordingToCat from "./components/pages/BookAccordingToCat";
 import Login from "./components/admin/Login";
-import Testo from "./components/pages/Testo";
 import AuthorCreate from "./components/admin/AuthorCreate";
 import AuthorSelector from "./components/admin/AuthorSelector";
 import BookUploadForm from "./components/admin/BookUploadForm";
@@ -34,6 +33,7 @@ import BookDeleteAll from "./components/admin/BookDeleteAll";
 import ViewSingleBook from "./components/admin/ViewSingleBook";
 import UpdateUserImage from "./components/admin/UpdateUserImage";
 import BookUpdatePicture from "./components/admin/BookUpdatePicture";
+import UpdateBookAudio from "./components/admin/UpdateBookAudio";
 
 
 
@@ -58,7 +58,6 @@ function App() {
     <Route path="/author_edit" element={<AuthorEdit />} />
     <Route path="/book_cat/:id" element={<BookAccordingToCat />} />
     <Route path="/smogazboard" element={<Login />} />
-    <Route path="/testo"element={ <Testo /> } />
     <Route path="/create_author" element={ <AuthorCreate />} />
     <Route path="/author_selector" element={<AuthorSelector />} />
     <Route path="/book_upload_form/:id" element={ <BookUploadForm /> } />
@@ -78,6 +77,7 @@ function App() {
     <Route path="/view_single_book/:id" element={<ViewSingleBook /> } />
     <Route path="/update_user_image/:id" element={<UpdateUserImage />} />
     <Route path="/book_update_picture/:id" element={<BookUpdatePicture />} />
+    <Route path="/book_update_audio/:id" element={<UpdateBookAudio />} />
     
 
 

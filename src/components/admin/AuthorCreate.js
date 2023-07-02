@@ -40,7 +40,7 @@ function AuthorCreate() {
         }
     })
 
-    window.location.href = `/books`
+    window.location.href = `/authors`
 
 
         

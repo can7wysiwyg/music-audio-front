@@ -3,6 +3,7 @@ import "./styles/books.css";
 import axios from "axios";
 import { useContext } from "react";
 import { GlobalState } from "../../GlobalState";
+import { useSpring, animated } from 'react-spring';
 
 
 function Books() {
@@ -11,6 +12,7 @@ function Books() {
   const [audiosPerPage] = useState(6);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   useEffect(() => {
     const getBooks = async () => {
@@ -32,7 +34,11 @@ function Books() {
   if (audios.length === 0) {
     return (
       <>
-        <h1 className="text-center"> books are loading cutie 🙂🙂🙂</h1>
+      <animated.div style={fadeProps}>
+      <h1 className="text-center">books are loading cutie 🙂🙂🙂</h1>
+    </animated.div>
+        
+        
       </>
     );
   }
@@ -118,27 +124,33 @@ const DisplayBooks = ({ audioItem }) => {
     }
   }, [audioItem.authorName, writers]);
 
+    
   function listBooksDisplay() {
+    const baseUrl = "http://localhost:5000";
     let audioPath = audioItem.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
     let imagePath = audioItem.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
-      
-    if (audioPath.startsWith("uploads/") && imagePath.startsWith("uploads/")) {
-      let audioUrl = `http://localhost:5000/${audioPath}`;
-      let imageUrl = `http://localhost:5000/${imagePath}`;
-
+  
+    
+    if (audioPath.startsWith("uploads/") || audioPath.startsWith("/uploads/")) {
+      const audioUrl = audioPath.startsWith("/") ? `${baseUrl}${audioPath}` : `${baseUrl}/${audioPath}`;
+      const imageUrl = imagePath.startsWith("/") ? `${baseUrl}${imagePath}` : `${baseUrl}/${imagePath}`;
+  
+      // console.log("imageUrl:", imageUrl);
+      // console.log("audioUrl:", audioUrl);
+  
       return (
         <>
           <div className="book-card">
             <div className="image-container">
               <img className="book-image" src={imageUrl} alt="Book 1" />
             </div>
-
+  
             <div className="card-content">
               <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }}>
                 {audioItem.bookTitle}
               </a>
               <p className="card-text">{newWriters.AuthorName}</p>
-              { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${audioItem._id}`}> manage book</a></p> : "" }
+              {isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${audioItem._id}`}> manage book</a></p> : ""}
               <div className="audio-container">
                 <audio controls>
                   <source src={audioUrl} type="audio/mpeg" />
@@ -150,24 +162,25 @@ const DisplayBooks = ({ audioItem }) => {
         </>
       );
     } else {
-      let audioUrl = `http://localhost:5000${audioPath}`;
-      let imageUrl = `http://localhost:5000/${imagePath}`;
-
-      
-
+      let audioUrl = `${baseUrl}/${audioPath}`;
+      let imageUrl = `${baseUrl}/${imagePath}`;
+  
+      console.log("imageUrl:", imageUrl);
+      console.log("audioUrl:", audioUrl);
+  
       return (
         <>
           <div className="book-card">
             <div className="image-container">
               <img className="book-image" src={imageUrl} alt="Book 1" />
             </div>
-
+  
             <div className="card-content">
               <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }}>
                 {audioItem.bookTitle}
               </a>
               <p className="card-text">{newWriters.AuthorName}</p>
-              { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${audioItem._id}`}> manage book</a></p> : "" }
+              {isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${audioItem._id}`}> manage book</a></p> : ""}
               <div className="audio-container">
                 <audio controls>
                   <source src={audioUrl} type="audio/mpeg" />
@@ -180,7 +193,8 @@ const DisplayBooks = ({ audioItem }) => {
       );
     }
   }
-
+  
+  
   return <>{listBooksDisplay()}</>;
 };
 
