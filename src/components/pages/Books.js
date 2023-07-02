@@ -121,8 +121,8 @@ const DisplayBooks = ({ audioItem }) => {
   function listBooksDisplay() {
     let audioPath = audioItem.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
     let imagePath = audioItem.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
-
-    if (audioPath.startsWith("uploads/")) {
+      
+    if (audioPath.startsWith("uploads/") && imagePath.startsWith("uploads/")) {
       let audioUrl = `http://localhost:5000/${audioPath}`;
       let imageUrl = `http://localhost:5000/${imagePath}`;
 
@@ -151,7 +151,9 @@ const DisplayBooks = ({ audioItem }) => {
       );
     } else {
       let audioUrl = `http://localhost:5000${audioPath}`;
-      let imageUrl = `http://localhost:5000${imagePath}`;
+      let imageUrl = `http://localhost:5000/${imagePath}`;
+
+      
 
       return (
         <>

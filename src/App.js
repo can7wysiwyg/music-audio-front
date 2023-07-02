@@ -32,6 +32,8 @@ import AuthorPhoneEdit from "./components/admin/AuthorPhoneEdit";
 import ViewSingle from "./components/admin/ViewSingle";
 import BookDeleteAll from "./components/admin/BookDeleteAll";
 import ViewSingleBook from "./components/admin/ViewSingleBook";
+import UpdateUserImage from "./components/admin/UpdateUserImage";
+import BookUpdatePicture from "./components/admin/BookUpdatePicture";
 
 
 
@@ -74,7 +76,8 @@ function App() {
     <Route path="/view_single/:id" element={<ViewSingle />} />
     <Route path="/book_delete_all/:id" element={ <BookDeleteAll /> } />
     <Route path="/view_single_book/:id" element={<ViewSingleBook /> } />
-    
+    <Route path="/update_user_image/:id" element={<UpdateUserImage />} />
+    <Route path="/book_update_picture/:id" element={<BookUpdatePicture />} />
     
 
 

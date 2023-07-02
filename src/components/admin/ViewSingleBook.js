@@ -143,7 +143,7 @@ function ViewSingleBook() {
 
     } else{
 
-        let imageUrl = `http://localhost:5000${imagePath}`;
+        let imageUrl = `http://localhost:5000/${imagePath}`;
         let audioUrl = `http://localhost:5000${audioPath}`;
 
         return(   <>

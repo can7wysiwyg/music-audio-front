@@ -121,7 +121,7 @@ function BookSingle() {
       );
     } else {
       let audioUrl = `http://localhost:5000${audioPath}`;
-      let imageUrl = `http://localhost:5000${imagePath}`;
+      let imageUrl = `http://localhost:5000/${imagePath}`;
 
       return (
         <>

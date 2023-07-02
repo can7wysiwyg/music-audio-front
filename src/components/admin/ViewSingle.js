@@ -95,13 +95,14 @@ function ViewSingle() {
    
     if (imagePath.startsWith('uploads/')) {
         let imageUrl = `http://localhost:5000/${imagePath}`;
+        
 
         return (
             <>
             <Row className="justify-content-md-center">
             <Col md={6}  >
               <Card className="author-card d-flex align-items-center justify-content-center" >
-                <Card.Img variant="top" src={imageUrl} alt="Author Image" width="50%" />
+                <Card.Img variant="top" src={imageUrl} alt="Book Image" width="50%" />
                 <Card.Body>
                   <Card.Title>{author.AuthorName}</Card.Title>
                  
@@ -191,7 +192,7 @@ function ViewSingle() {
              <Row className="justify-content-md-center">
             <Col md={6}  >
               <Card className="author-card d-flex align-items-center justify-content-center" >
-                <Card.Img variant="top" src={imageUrl} alt="Author Image" width="50%" />
+                <Card.Img variant="top" src={imageUrl} alt="Book Image" width="50%" />
                 <Card.Body>
                   <Card.Title>{author.AuthorName}</Card.Title>
                  
