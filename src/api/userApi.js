@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 
 
+
 function UserApi() {
     const [isLogged, setIsLogged] = useState(false)
     const [isAdmin, setIsadmin] = useState(false)
@@ -14,7 +15,7 @@ function UserApi() {
         if(token) {
          
             const getUser = async() => {
-                const res = await axios.get('/admin/user', {
+                const res = await axios.get(`https://audiobooksapi.onrender.com/admin/user`, {
                     headers: {Authorization: `Bearer ${token}`}
                 })
                 setIsLogged(true)

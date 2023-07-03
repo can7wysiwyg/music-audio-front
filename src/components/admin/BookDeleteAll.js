@@ -12,7 +12,7 @@ function BookDeleteAll() {
   const token = state.token
 
   const deleteAll = async() => {
-    await axios.delete(`/audio/delete_authors_all/${id}`, {
+    await axios.delete(`https://audiobooksapi.onrender.com/audio/delete_authors_all/${id}`, {
         headers: {
             Authorization: `Bearer ${token}`
         }

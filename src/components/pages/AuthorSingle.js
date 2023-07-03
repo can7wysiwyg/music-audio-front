@@ -17,7 +17,7 @@ function AuthorSingle() {
 
     useEffect(() => {
       const getAuthors = async () => {
-        const res = await axios.get(`/author/show_single/${id}`);
+        const res = await axios.get(`https://audiobooksapi.onrender.com/author/show_single/${id}`);
         setWriter(res.data.result);
       };
     
@@ -46,7 +46,7 @@ function AuthorSingle() {
     let imagePath = writer.AuthorImage.authorImageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
 
     if (imagePath.startsWith("uploads/")) {
-      let imageUrl = `http://localhost:5000/${imagePath}`;
+      let imageUrl = `https://audiobooksapi.onrender.com/${imagePath}`;
 
       return (
         <>
@@ -79,7 +79,7 @@ function AuthorSingle() {
 
 
     } else{
-      let imageUrl = `http://localhost:5000${imagePath}`;
+      let imageUrl = `https://audiobooksapi.onrender.com${imagePath}`;
 
       return (
         <>

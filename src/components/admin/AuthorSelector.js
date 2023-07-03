@@ -14,7 +14,7 @@ function AuthorSelector() {
 
   useEffect(() => {
     const getAuthors = async () => {
-      const res = await axios.get("/author/show_all");
+      const res = await axios.get("https://audiobooksapi.onrender.com/author/show_all");
       setAuthors(res.data.authors);
     };
 
@@ -99,7 +99,7 @@ const AuthorsList = ({ result }) => {
     let imagePath = result.AuthorImage.authorImageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
 
     if (imagePath.startsWith("uploads/")) {
-      let imageUrl = `http://localhost:5000/${imagePath}`;
+      let imageUrl = `https://audiobooksapi.onrender.com/${imagePath}`;
       return (
         <>
           <li className="list-group-item d-flex align-items-center p-3">
@@ -133,7 +133,7 @@ const AuthorsList = ({ result }) => {
         </>
       );
     } else {
-      let imageUrl = `http://localhost:5000${imagePath}`;
+      let imageUrl = `https://audiobooksapi.onrender.com${imagePath}`;
 
       return (
         <>

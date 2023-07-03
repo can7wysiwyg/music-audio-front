@@ -16,7 +16,7 @@ function Books() {
 
   useEffect(() => {
     const getBooks = async () => {
-      const res = await axios.get("/audio/show_all");
+      const res = await axios.get("https://audiobooksapi.onrender.com/audio/show_all");
       setAudios(res.data.books);
     };
 
@@ -107,7 +107,7 @@ const DisplayBooks = ({ audioItem }) => {
 
   useEffect(() => {
     const getAuthors = async () => {
-      const res = await axios.get("/author/show_all");
+      const res = await axios.get("https://audiobooksapi.onrender.com/author/show_all");
       setWriters(res.data.authors);
     };
 
@@ -126,7 +126,7 @@ const DisplayBooks = ({ audioItem }) => {
 
     
   function listBooksDisplay() {
-    const baseUrl = "http://localhost:5000";
+    const baseUrl = "https://audiobooksapi.onrender.com";
     let audioPath = audioItem.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
     let imagePath = audioItem.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
   
@@ -135,9 +135,7 @@ const DisplayBooks = ({ audioItem }) => {
       const audioUrl = audioPath.startsWith("/") ? `${baseUrl}${audioPath}` : `${baseUrl}/${audioPath}`;
       const imageUrl = imagePath.startsWith("/") ? `${baseUrl}${imagePath}` : `${baseUrl}/${imagePath}`;
   
-      // console.log("imageUrl:", imageUrl);
-      // console.log("audioUrl:", audioUrl);
-  
+      
       return (
         <>
           <div className="book-card">
@@ -165,9 +163,7 @@ const DisplayBooks = ({ audioItem }) => {
       let audioUrl = `${baseUrl}/${audioPath}`;
       let imageUrl = `${baseUrl}/${imagePath}`;
   
-      console.log("imageUrl:", imageUrl);
-      console.log("audioUrl:", audioUrl);
-  
+      
       return (
         <>
           <div className="book-card">

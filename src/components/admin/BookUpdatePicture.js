@@ -20,7 +20,7 @@ function BookUpdatePicture() {
         let formData = new FormData();
         formData.append("audioImage", audioImage);
 
-        await axios.put(`/audio/update_picture/${id}`, formData, {
+        await axios.put(`https://audiobooksapi.onrender.com/audio/update_picture/${id}`, formData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

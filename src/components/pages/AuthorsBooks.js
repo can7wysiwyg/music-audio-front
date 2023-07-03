@@ -16,7 +16,7 @@ const AuthorsBooks = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/audio/show_author_books/${id}`);
+        const response = await axios.get(`https://audiobooksapi.onrender.com/audio/show_author_books/${id}`);
         setCards(response.data.books);
       } catch (error) {
         console.error(error);
@@ -77,7 +77,7 @@ const MyBooks = ({result, id}) => {
 
     useEffect(() => {
         const getAuthors = async () => {
-          const res = await axios.get(`/author/show_single/${id}`);
+          const res = await axios.get(`https://audiobooksapi.onrender.com/author/show_single/${id}`);
           setWriter(res.data.result);
         };
       
@@ -89,7 +89,7 @@ const MyBooks = ({result, id}) => {
 
 
       function listBooksDisplay() {
-        const baseUrl = "http://localhost:5000";
+        const baseUrl = "https://audiobooksapi.onrender.com";
         let audioPath = result.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
         let imagePath = result.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
       

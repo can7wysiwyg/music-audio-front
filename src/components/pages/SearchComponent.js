@@ -33,7 +33,7 @@ function SearchComponent() {
         setIsLoading(true);
         setError(null);
 
-        const response = await axios.get("/audio/show_all");
+        const response = await axios.get("https://audiobooksapi.onrender.com/audio/show_all");
         const audioData = response.data.books;
 
         const filteredResults = audioData.filter((audio) => {
@@ -124,7 +124,7 @@ const DisplayBooks = ({audio}) => {
 
         const getUsers = async() => {
           
-            const res = await axios.get("/author/show_all")
+            const res = await axios.get("https://audiobooksapi.onrender.com/author/show_all")
 
             setAuthors(res.data.authors)
 

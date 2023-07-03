@@ -12,7 +12,7 @@ function BookEdit() {
 
   useEffect(() => {
     const getItems = async () => {
-      const res = await axios.get("/audio/show_all");
+      const res = await axios.get("https://audiobooksapi.onrender.com/audio/show_all");
       setItems(res.data.books);
     }
     getItems();
@@ -91,7 +91,7 @@ const BooksToEdit = ({ book }) => {
 
   useEffect(() => {
     const getAuthors = async () => {
-      const res = await axios.get("/author/show_all");
+      const res = await axios.get("https://audiobooksapi.onrender.com/author/show_all");
       setAuthors(res.data.authors);
     };
     getAuthors();
@@ -116,7 +116,7 @@ const BooksToEdit = ({ book }) => {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`/audio/delete_audio_book/${book._id}`, {
+    await axios.delete(`https://audiobooksapi.onrender.com/audio/delete_audio_book/${book._id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -129,8 +129,8 @@ const BooksToEdit = ({ book }) => {
     let imagePath = book.audioImage.imageLink.replace(/\\/g, "/");
 
     if (audioPath.startsWith("uploads/")) {
-      let audioUrl = `http://localhost:5000/${audioPath}`;
-      let imageUrl = `http://localhost:5000/${imagePath}`;
+      let audioUrl = `https://audiobooksapi.onrender.com/${audioPath}`;
+      let imageUrl = `https://audiobooksapi.onrender.com/${imagePath}`;
 
       return (
         <>
@@ -178,8 +178,8 @@ const BooksToEdit = ({ book }) => {
         </>
       );
     } else {
-      let audioUrl = `http://localhost:5000${audioPath}`;
-      let imageUrl = `http://localhost:5000${imagePath}`;
+      let audioUrl = `https://audiobooksapi.onrender.com${audioPath}`;
+      let imageUrl = `https://audiobooksapi.onrender.com${imagePath}`;
 
       return (
         <>

@@ -17,7 +17,7 @@ function AuthorPhoneEdit() {
     const handleSubmit = async (event) => {
         event.preventDefault();
     
-        await axios.put(`/author/edit_profile_info/${id}`, { AuthorPhoneNumber }, {
+        await axios.put(`https://audiobooksapi.onrender.com/author/edit_profile_info/${id}`, { AuthorPhoneNumber }, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

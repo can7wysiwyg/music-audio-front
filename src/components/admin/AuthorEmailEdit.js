@@ -19,7 +19,7 @@ function AuthorEmailEdit() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    await axios.put(`/author/edit_profile_info/${id}`, { AuthorEmail }, {
+    await axios.put(`https://audiobooksapi.onrender.com/author/edit_profile_info/${id}`, { AuthorEmail }, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

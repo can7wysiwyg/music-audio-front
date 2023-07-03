@@ -18,7 +18,7 @@ function ViewSingleBook() {
 
     useEffect(() => {
         const getSingleBook = async () => {
-          const res = await axios.get(`/audio/show_single/${id}`);
+          const res = await axios.get(`https://audiobooksapi.onrender.com/audio/show_single/${id}`);
           setSingleBook(res.data.book);
         };
     
@@ -44,7 +44,7 @@ function ViewSingleBook() {
 
       const handleDelete = async() => {
 
-        await axios.delete(`/audio/delete_audio_book/${singleBook._id}`, {
+        await axios.delete(`https://audiobooksapi.onrender.com/audio/delete_audio_book/${singleBook._id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -59,7 +59,7 @@ function ViewSingleBook() {
 
       function ShowBook() {
 
-        const baseUrl = "http://localhost:5000";
+        const baseUrl = "https://audiobooksapi.onrender.com";
         let audioPath = singleBook.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
         let imagePath = singleBook.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
       

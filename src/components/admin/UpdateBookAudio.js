@@ -20,7 +20,7 @@ function UpdateBookAudio() {
 
     formData.append("audioBook", audioBook);
 
-    await axios.put(`/audio/update_audio_only/${id}`, formData, {
+    await axios.put(`https://audiobooksapi.onrender.com/audio/update_audio_only/${id}`, formData, {
         headers: {
             Authorization: `Bearer ${token}`
         }

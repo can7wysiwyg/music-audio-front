@@ -19,7 +19,7 @@ function AuthorLocationEdit() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    await axios.put(`/author/edit_profile_info/${id}`, { AuthorLocation }, {
+    await axios.put(`https://audiobooksapi.onrender.com/author/edit_profile_info/${id}`, { AuthorLocation }, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

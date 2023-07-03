@@ -21,7 +21,7 @@ function ViewSingle() {
   useEffect(() => {
 
     const getUser = async() => {
-        const res = await axios.get(`/author/show_single/${id}`, {
+        const res = await axios.get(`https://audiobooksapi.onrender.com/author/show_single/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -37,7 +37,7 @@ function ViewSingle() {
 
   useEffect(() => {
     const getBooks = async () => {
-      const res = await axios.get('/audio/show_all');
+      const res = await axios.get('https://audiobooksapi.onrender.com/audio/show_all');
       setBooks(res.data.books);
     };
 
@@ -78,7 +78,7 @@ function ViewSingle() {
 
   const handleDelete = async (event) => {
     event.preventDefault();
-    await axios.delete(`/author/delete_author/${author._id}`, {
+    await axios.delete(`https://audiobooksapi.onrender.com/author/delete_author/${author._id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -94,7 +94,7 @@ function ViewSingle() {
     let imagePath = author.AuthorImage.authorImageLink.replace(/\\/g, '/'); // Convert backslashes to forward slashes
    
     if (imagePath.startsWith('uploads/')) {
-        let imageUrl = `http://localhost:5000/${imagePath}`;
+        let imageUrl = `https://audiobooksapi.onrender.com/${imagePath}`;
         
 
         return (
@@ -185,7 +185,7 @@ function ViewSingle() {
 
     } else{
 
-        let imageUrl = `http://localhost:5000${imagePath}`; 
+        let imageUrl = `https://audiobooksapi.onrender.com${imagePath}`; 
 
         return (
             <>

@@ -88,13 +88,17 @@ const ListedBooks = ({ item }) => {
   }, [item.authorName, authors]);
 
   function ToDisplay() {
+
+    const baseUrl = "https://audiobooksapi.onrender.com";
     let audioPath = item.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
     let imagePath = item.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
-
-    if (audioPath.startsWith("uploads/")) {
-      let audioUrl = `http://localhost:5000/${audioPath}`;
-      let imageUrl = `http://localhost:5000/${imagePath}`;
-
+  
+    
+    if (audioPath.startsWith("uploads/") || audioPath.startsWith("/uploads/")) {
+      const audioUrl = audioPath.startsWith("/") ? `${baseUrl}${audioPath}` : `${baseUrl}/${audioPath}`;
+      const imageUrl = imagePath.startsWith("/") ? `${baseUrl}${imagePath}` : `${baseUrl}/${imagePath}`;
+  
+    
       return (
         <>
           <Card className="book-card">
@@ -117,9 +121,10 @@ const ListedBooks = ({ item }) => {
         </>
       );
     } else {
-      let audioUrl = `http://localhost:5000${audioPath}`;
-      let imageUrl = `http://localhost:5000${imagePath}`;
-
+      let audioUrl = `${baseUrl}/${audioPath}`;
+      let imageUrl = `${baseUrl}/${imagePath}`;
+  
+      
       return (
         <>
           <Card className="book-card">

@@ -18,7 +18,7 @@ const BookTitleUpdate = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    await axios.put(`/audio/update_all/${id}`, { bookTitle }, {
+    await axios.put(`https://audiobooksapi.onrender.com/audio/update_all/${id}`, { bookTitle }, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

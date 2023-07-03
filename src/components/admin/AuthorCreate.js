@@ -34,7 +34,7 @@ function AuthorCreate() {
     formData.append("AuthorPhoneNumber",  AuthorPhoneNumber)
     formData.append("AuthorImage", AuthorImage)
 
-     await axios.post("/author/create", formData, {
+     await axios.post("https://audiobooksapi.onrender.com/author/create", formData, {
         headers: {
             Authorization: `Bearer ${token}`
         }

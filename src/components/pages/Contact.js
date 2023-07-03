@@ -7,22 +7,9 @@ function Contact() {
         <div className="row justify-content-center">
           <div className="col-lg-8">
             <div className="contact-form">
-              <h2>Contact Us</h2>
-              <form>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Your Name"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Your Email"
-                  />
-                </div>
+              <h2>Email Us</h2>
+              <form action="mailto:hugostoltz12@protonmail.me">
+                
                 <div className="form-group">
                   <textarea
                     className="form-control"
@@ -30,7 +17,8 @@ function Contact() {
                     placeholder="Your Message"
                   ></textarea>
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <br />
+                <button type="submit" className="btn btn-primary" disabled>
                   Send Message
                 </button>
               </form>
@@ -43,7 +31,7 @@ function Contact() {
         <div className="col-lg-8">
           <div className="address-section">
             <h2>Our Address</h2>
-            <p>123 Main Street, City, Country</p>
+            <p>Limbe, Blantyre, Malawi</p>
           </div>
         </div>
       </div>
@@ -51,23 +39,16 @@ function Contact() {
       <div className="row justify-content-center">
         <div className="col-lg-8">
           <div className="social-icons">
-            <a href="/">
+            <a href="https://facebook">
               <i className="fab fa-facebook"></i>
             </a>
-            <a href="/">
+            <a href="https://twitter.com">
               <i className="fab fa-twitter"></i>
             </a>
-            <a href="/">
+            <a href="https://instagram.com">
               <i className="fab fa-instagram"></i>
               </a>
           
-
-                  <a href="/">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="/">
-              <i className="fab fa-linkedin"></i>
-            </a>
           </div>
         </div>
       </div>

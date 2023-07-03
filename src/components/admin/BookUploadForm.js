@@ -22,7 +22,7 @@ function BookUploadForm() {
 
   useEffect(() => {
     const getGenres = async () => {
-      const res = await axios.get("/genre/show_all");
+      const res = await axios.get("https://audiobooksapi.onrender.com/genre/show_all");
       setCategories(res.data.results);
     };
 
@@ -47,7 +47,7 @@ function BookUploadForm() {
     formData.append("audioImage", audioImage);
     formData.append("audioBook", audioBook);
 
-    const res = await axios.post("/audio/create_audio", formData, {
+    const res = await axios.post("https://audiobooksapi.onrender.com/audio/create_audio", formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

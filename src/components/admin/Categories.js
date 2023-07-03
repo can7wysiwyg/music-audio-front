@@ -13,7 +13,7 @@ const Categories = () => {
 
   useEffect(() => {
     const getGenres = async () => {
-      const res = await axios.get('/genre/show_all');
+      const res = await axios.get('https://audiobooksapi.onrender.com/genre/show_all');
       setCategories(res.data.results);
     };
 
@@ -32,7 +32,7 @@ const Categories = () => {
       setCategoryName('');
     }
 
-    await axios.post('/genre/create_genre', { bookGenre }, {
+    await axios.post('https://audiobooksapi.onrender.com/genre/create_genre', { bookGenre }, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -117,7 +117,7 @@ const ListedCats = ({cat}) => {
   useEffect(() => {
 
     const getProds = async() => {
-const res = await axios.get("/audio/show_all")
+const res = await axios.get("https://audiobooksapi.onrender.com/audio/show_all")
 
 setAudios(res.data.books)
  
@@ -147,7 +147,7 @@ if(cat._id) {
 
 const deleteCat = async() => {
 
-  const res = await axios.delete(`/genre/delete_genre/${cat._id}`, {
+  const res = await axios.delete(`https://audiobooksapi.onrender.com/genre/delete_genre/${cat._id}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }

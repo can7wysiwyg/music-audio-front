@@ -17,7 +17,7 @@ function NavHeader() {
   
   useEffect(() => {
     const getGenres = async () => {
-      const res = await axios.get("/genre/show_all");
+      const res = await axios.get("https://audiobooksapi.onrender.com/genre/show_all");
       setCategories(res.data.results);
     };
 
