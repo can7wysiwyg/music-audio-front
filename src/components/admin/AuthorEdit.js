@@ -146,17 +146,13 @@ const EditAuthors = ({ result }) => {
   };
 
   function ShowAuthors() {
-    let imagePath = result.AuthorImage.authorImageLink.replace(/\\/g, '/'); // Convert backslashes to forward slashes
-
-    if (imagePath.startsWith('uploads/')) {
-      let imageUrl = `https://audiobooksapi.onrender.com/${imagePath}`;
-
+   
       return (
         <>
           <Card className="author-card d-flex flex-column">
             <Card.Img
               variant="top"
-              src={imageUrl}
+              src={result.AuthorImage}
               alt="Author Image"
               style={{ width: '100%', height: '200px', borderRadius: '10px', objectFit: 'cover' }}
               className="card-image"
@@ -235,91 +231,7 @@ const EditAuthors = ({ result }) => {
           </Modal>
         </>
       );
-    } else {
-      let imageUrl = `https://audiobooksapi.onrender.com${imagePath}`;
-
-      return (
-        <>
-          <Card className="author-card d-flex align-items-center justify-content-center">
-            <Card.Img variant="top" src={imageUrl} alt="Author Image" />
-            <Card.Body>
-              <Card.Title>{result.AuthorName}</Card.Title>
-              <Card.Link href={`/author_single/${result._id}`}>More Info</Card.Link>
-              <div className="btn-group">
-                <Button variant="primary" onClick={handleEdit}>
-                  Edit
-                </Button>
-                
-                 {filterDelete.authorName === result._id ? (
-                  <Button variant="secondary" onClick={handleAction}>
-                    Choose Action
-                  </Button>
-                ) : (
-                  <Button variant="danger" onClick={handleDelete}>
-                    Delete
-                  </Button>
-                )}
-
- 
-
-              </div>
-            </Card.Body>
-          </Card>
-          <br />
-
-          <Modal show={showModal} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Author</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <p>Choose Action:</p>
-              <ul>
-                <li>
-                  <a href={`/edit_info/${result._id}`}>Edit User Info</a>
-                </li>
-                <li>
-                  <a href={`/update_user_image/${result._id}`}>Update Photo</a>
-                </li>
-              </ul>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-
-           <Modal show={showDeleteModal} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>This Author Has Books, So Delete The Books First..</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-               <p>Choose Action:</p>
-              <ul>
-                <li>
-                  <a href={`/book_delete_all/${result._id}`}>Delete All Books At Once</a>
-                </li>
-                <li>
-                  <a href={`/authors_books/${result._id}`}>Delete Select Books</a>
-                </li>
-              </ul>
-              
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Cancel
-              </Button>
-              {/* <Button variant="danger" onClick={handleDelete}>
-                Delete
-              </Button> */}
-            </Modal.Footer>
-          </Modal>
-
-
-        </>
-      );
-    }
-  }
+     }
 
   return <>{ShowAuthors()}</>;
 };

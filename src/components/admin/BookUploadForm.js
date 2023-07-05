@@ -1,7 +1,6 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GlobalState } from "../../GlobalState";
-import { useState } from "react";
 import axios from "axios";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
 
@@ -16,14 +15,20 @@ function BookUploadForm() {
     released: "",
     bookDescription: "",
   });
-  const [audioBook, setAudio] = useState("");
-  const [audioImage, setImage] = useState("");
+  const [audioBook, setAudioBook] = useState(false);
+  const [audioImage, setAudioImage] = useState(false);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const getGenres = async () => {
-      const res = await axios.get("https://audiobooksapi.onrender.com/genre/show_all");
-      setCategories(res.data.results);
+      try {
+        const response = await axios.get(
+          "https://audiobooksapi.onrender.com/genre/show_all"
+        );
+        setCategories(response.data.results);
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+      }
     };
 
     getGenres();
@@ -31,14 +36,23 @@ function BookUploadForm() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setValues({ ...values, [name]: value });
+    setValues((prevValues) => ({ ...prevValues, [name]: value }));
+  };
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setAudioImage(file);
+  };
+
+  const handleAudioUpload = (event) => {
+    const file = event.target.files[0];
+    setAudioBook(file);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let formData = new FormData();
-
+    const formData = new FormData();
     formData.append("authorName", authorName);
     formData.append("bookTitle", values.bookTitle);
     formData.append("audioGenre", values.audioGenre);
@@ -47,98 +61,102 @@ function BookUploadForm() {
     formData.append("audioImage", audioImage);
     formData.append("audioBook", audioBook);
 
-    const res = await axios.post("https://audiobooksapi.onrender.com/audio/create_audio", formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    try {
+      const response = await axios.post(
+        "https://audiobooksapi.onrender.com/audio/create_audio",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    alert(res.data.msg);
-
-    window.location.href = "/books"
+      alert(response.data.msg);
+      window.location.href = "/books";
+    } catch (error) {
+      console.error("Error uploading book:", error);
+    }
   };
 
   return (
-    <>
-      <Container>
-        <Row className="justify-content-md-center">
-          <Col xs={12} md={6}>
-            <Form onSubmit={handleSubmit} encType="multipart/form-data">
-              <Form.Group className="mb-3" controlId="formBasicBookImage">
-                <Form.Label>upload book image</Form.Label>
-                <Form.Control
-                  type="file"
-                  onChange={(event) => setImage(event.target.files[0])}
-                  required
-                />
-              </Form.Group>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col xs={12} md={6}>
+          <Form onSubmit={handleSubmit} encType="multipart/form-data">
+            <Form.Group className="mb-3" controlId="formBasicBookImage">
+              <Form.Label>Upload book image</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={handleImageUpload}
+                required
+              />
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicBookAudio">
-                <Form.Label>upload book audio</Form.Label>
-                <Form.Control
-                  type="file"
-                  onChange={(event) => setAudio(event.target.files[0])}
-                  required
-                />
-              </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicBookAudio">
+              <Form.Label>Upload book audio</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={handleAudioUpload}
+                required
+              />
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicBookName">
-                <Form.Control
-                  type="text"
-                  name="bookTitle"
-                  value={values.bookTitle}
-                  onChange={handleChange}
-                  placeholder="Book Title"
-                  required
-                />
-              </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicBookName">
+              <Form.Control
+                type="text"
+                name="bookTitle"
+                value={values.bookTitle}
+                onChange={handleChange}
+                placeholder="Book Title"
+                required
+              />
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicBookGenre">
-                <Form.Select
-                  type="text"
-                  name="audioGenre"
-                  value={values.audioGenre}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Select Book Genre</option>
-                  {categories.map((category) => (
-                    <option value={category._id} key={category._id}>
-                      {category.bookGenre}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicBookGenre">
+              <Form.Select
+                name="audioGenre"
+                value={values.audioGenre}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Book Genre</option>
+                {categories.map((category) => (
+                  <option value={category._id} key={category._id}>
+                    {category.bookGenre}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicDescription">
-                <Form.Control
-                  as="textarea"
-                  rows="3"
-                  name="bookDescription"
-                  value={values.bookDescription}
-                  onChange={handleChange}
-                  placeholder="a short description of the book"
-                />
-              </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicDescription">
+              <Form.Control
+                as="textarea"
+                rows="3"
+                name="bookDescription"
+                value={values.bookDescription}
+                onChange={handleChange}
+                placeholder="A short description of the book"
+              />
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicBookRelease">
-                <Form.Control
-                  type="date"
-                  name="released"
-                  value={values.released}
-                  onChange={handleChange}
-                  placeholder="Book Release Date"
-                  required
-                />
-              </Form.Group>
-              <Button variant="warning" type="submit">
-                upload book
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </>
+            <Form.Group className="mb-3" controlId="formBasicBookRelease">
+              <Form.Control
+                type="date"
+                name="released"
+                value={values.released}
+                onChange={handleChange}
+                placeholder="Book Release Date"
+                required
+              />
+            </Form.Group>
+            <Button variant="warning" type="submit">
+              Upload book
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

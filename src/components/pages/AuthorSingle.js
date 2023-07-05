@@ -43,16 +43,12 @@ function AuthorSingle() {
 
 
   function displaySingleAuthor() {
-    let imagePath = writer.AuthorImage.authorImageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
-
-    if (imagePath.startsWith("uploads/")) {
-      let imageUrl = `https://audiobooksapi.onrender.com/${imagePath}`;
-
+    
       return (
         <>
         <div className={`author-details ${fadeIn ? 'fade-in' : ''}`} ref={authorDetailsRef}>
   <h2>{writer.AuthorName}</h2>
-  <img src={imageUrl} alt="Author Avatar" />
+  <img src={writer.AuthorImage} alt="Author Avatar" />
   <p className="text-dark">location: {writer.AuthorLocation}</p>
   <p className="text-dark">email: {writer.AuthorEmail}</p>
   <p className="text-dark">phone number: {writer.AuthorPhoneNumber}</p>
@@ -78,40 +74,7 @@ function AuthorSingle() {
 
 
 
-    } else{
-      let imageUrl = `https://audiobooksapi.onrender.com${imagePath}`;
-
-      return (
-        <>
-
-<div className={`author-details ${fadeIn ? 'fade-in' : ''}`} ref={authorDetailsRef}>
-  <h2>{writer.AuthorName}</h2>
-  <img src={imageUrl} alt="Author Avatar" />
-  <p className="text-dark">location: {writer.AuthorLocation}</p>
-  <p className="text-dark">email: {writer.AuthorEmail}</p>
-  <p className="text-dark">phone number: {writer.AuthorPhoneNumber}</p>
-  {isLogged === true && isAdmin === true ? (
-    <a href={`/view_single/${writer._id}`} style={{ color: "blue" }}>manage user</a>
-  ) : (
-    ""
-  )}
-  <div className="social-icons">
-    <a href="/"><i className="fab fa-facebook"></i></a>
-    <a href="/"><i className="fab fa-twitter"></i></a>
-    <a href="/"><i className="fab fa-instagram"></i></a>
-    <a href="/"><i className="fab fa-linkedin"></i></a>
-  </div>
-</div>
-
-
-
-
-
-        </>)
-
-
-    }
-
+    
 
 
 

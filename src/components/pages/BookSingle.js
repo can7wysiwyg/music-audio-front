@@ -83,16 +83,7 @@ function BookSingle() {
 
   function singleBookDisplay() {
 
-    const baseUrl = "https://audiobooksapi.onrender.com";
-        let audioPath = singleBook.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
-        let imagePath = singleBook.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
-      
-        
-        if (audioPath.startsWith("uploads/") || audioPath.startsWith("/uploads/")) {
-          const audioUrl = audioPath.startsWith("/") ? `${baseUrl}${audioPath}` : `${baseUrl}/${audioPath}`;
-          const imageUrl = imagePath.startsWith("/") ? `${baseUrl}${imagePath}` : `${baseUrl}/${imagePath}`;
-
-   
+    
       return (
         <>
           <div
@@ -100,7 +91,7 @@ function BookSingle() {
             ref={bookDetailsRef}
           >
             <h2>{singleBook.bookTitle}</h2>
-            <img src={imageUrl} alt="Book Cover" />
+            <img src={singleBook.audioImage} alt="Book Cover" />
             <a
               href={`/author_single/${writer._id}`}
               className="card-title"
@@ -115,7 +106,7 @@ function BookSingle() {
             { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${singleBook._id}`}> manage book</a></p> : "" }
             <div className="audio-player">
               <audio controls>
-                <source src={audioUrl} type="audio/mpeg" />
+                <source src={singleBook.audioBook} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
             </div>
@@ -125,43 +116,7 @@ function BookSingle() {
           </div>
         </>
       );
-    } else {
-      let audioUrl = `${baseUrl}/${audioPath}`;
-      let imageUrl = `${baseUrl}/${imagePath}`;
-  
-      return (
-        <>
-          <div
-            className={`book-details ${fadeIn ? "fade-in" : ""}`}
-            ref={bookDetailsRef}
-          >
-            <h2>{singleBook.bookTitle}</h2>
-            <img src={imageUrl} alt="Book Cover" />
-            <a
-              href={`/author_single/${writer._id}`}
-              className="card-title"
-              style={{ textDecoration: "none" }}
-            >
-              {writer?.AuthorName}
-            </a>
-            {/* <p>Author: {writer?.AuthorName}</p> */}
-            <p>Genre: {genres.bookGenre}</p>
-            <p>Description: {singleBook.bookDescription}</p>
-            <p>Released On: {moment(singleBook.released).format("MMM Do YYYY") }</p>
-            { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${singleBook._id}`}> manage book</a></p> : "" }
-            <div className="audio-player">
-              <audio controls>
-                <source src={audioUrl} type="audio/mpeg" />
-                Your browser does not support the audio element.
-              </audio>
-            </div>
-            <a href="/" className="btn btn-primary">
-              Buy Now
-            </a>
-          </div>
-        </>
-      );
-    }
+    
   }
 
   return <>{singleBookDisplay()}</>;

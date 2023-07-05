@@ -96,10 +96,7 @@ const AuthorsList = ({ result }) => {
   };
 
   function listAuthorsDisplay() {
-    let imagePath = result.AuthorImage.authorImageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
-
-    if (imagePath.startsWith("uploads/")) {
-      let imageUrl = `https://audiobooksapi.onrender.com/${imagePath}`;
+    
       return (
         <>
           <li className="list-group-item d-flex align-items-center p-3">
@@ -109,7 +106,7 @@ const AuthorsList = ({ result }) => {
                 overlay={<Tooltip>{result.AuthorName}</Tooltip>}
               >
                 <div className="avatar-wrapper">
-                  <img className="avatar" src={imageUrl} alt={result.AuthorName} />
+                  <img className="avatar" src={result.AuthorImage} alt={result.AuthorName} />
                 </div>
               </OverlayTrigger>
             </div>
@@ -132,42 +129,7 @@ const AuthorsList = ({ result }) => {
           </li>
         </>
       );
-    } else {
-      let imageUrl = `https://audiobooksapi.onrender.com${imagePath}`;
-
-      return (
-        <>
-          <li className="list-group-item d-flex align-items-center p-3">
-            <div className="avatar-container me-3">
-              <OverlayTrigger
-                placement="right"
-                overlay={<Tooltip>{result.AuthorName}</Tooltip>}
-              >
-                <div className="avatar-wrapper">
-                  <img className="avatar" src={imageUrl} alt={result.AuthorName} />
-                </div>
-              </OverlayTrigger>
-            </div>
-            <div className="content">
-              <h5 className="mb-1">{result.AuthorName}</h5>
-              <p className="mb-1">{result.AuthorEmail}</p>
-              <p className="mb-1">{result.AuthorPhoneNumber}</p>
-              <p className="mb-1">{result.AuthorLocation}</p>
-            </div>
-            <div className="ms-auto">
-              <OverlayTrigger
-                placement="left"
-                overlay={<Tooltip>Upload Book</Tooltip>}
-              >
-                <button className="btn btn-link" onClick={buttonRedirect}>
-                  <FaUpload />
-                </button>
-              </OverlayTrigger>
-            </div>
-          </li>
-        </>
-      );
-    }
+    
   }
 
   return <>{listAuthorsDisplay()}</>;

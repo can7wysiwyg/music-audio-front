@@ -89,24 +89,13 @@ const MyBooks = ({result, id}) => {
 
 
       function listBooksDisplay() {
-        const baseUrl = "https://audiobooksapi.onrender.com";
-        let audioPath = result.audioBook.audioLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
-        let imagePath = result.audioImage.imageLink.replace(/\\/g, "/"); // Convert backslashes to forward slashes
-      
-        
-        if (audioPath.startsWith("uploads/") || audioPath.startsWith("/uploads/")) {
-          const audioUrl = audioPath.startsWith("/") ? `${baseUrl}${audioPath}` : `${baseUrl}/${audioPath}`;
-          const imageUrl = imagePath.startsWith("/") ? `${baseUrl}${imagePath}` : `${baseUrl}/${imagePath}`;
-      
-          // console.log("imageUrl:", imageUrl);
-          // console.log("audioUrl:", audioUrl);
-      
+             
           return (
             <>
     
     <div className="book-card">
       <div className="image-container">
-        <img className="book-image" src={imageUrl} alt="Book 1" />
+        <img className="book-image" src={result.audioImage} alt="Book 1" />
       </div>
     
       <div className="card-content">
@@ -115,7 +104,7 @@ const MyBooks = ({result, id}) => {
         { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${result._id}`}> manage book</a></p> : "" }
         <div className="audio-container">
           <audio controls>
-            <source src={audioUrl} type="audio/mpeg" />
+            <source src={result.audioBook} type="audio/mpeg" />
           </audio>
         </div>
       </div>
@@ -129,40 +118,7 @@ const MyBooks = ({result, id}) => {
             
               
           );
-        } else {
-          let audioUrl = `${baseUrl}/${audioPath}`;
-          let imageUrl = `${baseUrl}/${imagePath}`;
-      
-         
-      
-          return (
-            <>
-    
-            <div className="book-card">
-              <div className="image-container">
-                <img className="book-image" src={imageUrl} alt="Book 1" />
-              </div>
-            
-              <div className="card-content">
-                <a href={`/book_single/${result._id}`} style={{ textDecoration: "none" }}>{result.bookTitle}</a>
-                <p className="card-text">{writer.AuthorName}</p>
-               { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${result._id}`}> manage book</a></p> : "" }
-                <div className="audio-container">
-                  <audio controls>
-                    <source src={audioUrl} type="audio/mpeg" />
-                  </audio>
-                </div>
-              </div>
-            </div>
-            <br />
-            
-                  
-                    
-                  </>
         
-           
-          );
-        }
       }
     
     
