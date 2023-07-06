@@ -90,6 +90,7 @@ function BookUploadForm() {
                 type="file"
                 onChange={handleImageUpload}
                 required
+                 accept=".jpg"
               />
             </Form.Group>
 
@@ -99,6 +100,7 @@ function BookUploadForm() {
                 type="file"
                 onChange={handleAudioUpload}
                 required
+                accept=".mp3"
               />
             </Form.Group>
 

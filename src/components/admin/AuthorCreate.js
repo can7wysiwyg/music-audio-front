@@ -62,7 +62,9 @@ function AuthorCreate() {
                 <Form.Control
                   type="file"
                   onChange={event => setImage(event.target.files[0])}
-                required/>
+                required
+                accept=".jpg"
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicAuthorName">

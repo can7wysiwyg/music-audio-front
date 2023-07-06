@@ -125,25 +125,19 @@ const BooksToEdit = ({ book }) => {
   };
 
   function ShowingItems() {
-    let audioPath = book.audioBook.audioLink.replace(/\\/g, "/");
-    let imagePath = book.audioImage.imageLink.replace(/\\/g, "/");
-
-    if (audioPath.startsWith("uploads/")) {
-      let audioUrl = `https://audiobooksapi.onrender.com/${audioPath}`;
-      let imageUrl = `https://audiobooksapi.onrender.com/${imagePath}`;
-
+    
       return (
         <>
-          <Card className="book-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+          <Card className="book-card mx-auto" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
             <div style={{ flex: 1 }}>
-              <Card.Img variant="top" src={imageUrl} alt="Book Cover" />
+              <Card.Img variant="top" src={book.audioImage} alt="Book Cover" />
             </div>
             <Card.Body style={{ flex: "auto", display: "flex", flexDirection: "column" }}>
               <Card.Link href={`/book_single/${book._id}`} style={{ textDecoration: "none" }}>{book.bookTitle}</Card.Link>
               <Card.Text>{newAuthor.AuthorName}</Card.Text>
               <Card.Text style={{ flex: 1 }}>{book.bookDescription}</Card.Text>
               <audio controls>
-                <source src={audioUrl} type="audio/mpeg" />
+                <source src={book.audioBook} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
               <div className="btn-group">
@@ -151,9 +145,9 @@ const BooksToEdit = ({ book }) => {
                 <Button variant="danger" onClick={handleDelete}>Delete</Button>
               </div>
             </Card.Body>
+          
           </Card>
-          <br />
-          <Modal show={showModal} onHide={handleClose}>
+                  <Modal show={showModal} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Edit Book</Modal.Title>
             </Modal.Header>
@@ -177,56 +171,7 @@ const BooksToEdit = ({ book }) => {
           </Modal>
         </>
       );
-    } else {
-      let audioUrl = `https://audiobooksapi.onrender.com${audioPath}`;
-      let imageUrl = `https://audiobooksapi.onrender.com${imagePath}`;
-
-      return (
-        <>
-          <Card className="book-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-            <div style={{ flex: 1 }}>
-              <Card.Img variant="top" src={imageUrl} alt="Book Cover" />
-            </div>
-            <Card.Body style={{ flex: "auto", display: "flex", flexDirection: "column" }}>
-              <Card.Link href={`/book_single/${book._id}`} style={{ textDecoration: "none" }}>{book.bookTitle}</Card.Link>
-              <Card.Text>{newAuthor.AuthorName}</Card.Text>
-              <Card.Text style={{ flex: 1 }}>{book.bookDescription}</Card.Text>
-              <audio controls>
-                <source src={audioUrl} type="audio/mpeg" />
-                Your browser does not support the audio element.
-              </audio>
-              <div className="btn-group">
-                <Button variant="primary" onClick={handleEdit}>Edit</Button>
-                <Button variant="danger" onClick={handleDelete}>Delete</Button>
-              </div>
-            </Card.Body>
-          </Card>
-          <br />
-          <Modal show={showModal} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Book</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <p>Edit the book's info:</p>
-              <ul>
-                <li>
-                  <a href={`/book_update_info/${book._id}`}>update book info</a>
-                </li>
-                <li>
-                  <a href={`/book_update_audio/${book._id}`}>update book audio</a>
-                </li>
-                <li>
-                  <a href={`/book_update_picture/${book._id}`}>update book picture</a>
-                </li>
-              </ul>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>Close</Button>
-            </Modal.Footer>
-          </Modal>
-        </>
-      );
-    }
+  
   }
 
   return (
