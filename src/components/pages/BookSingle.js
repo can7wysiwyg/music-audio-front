@@ -102,7 +102,7 @@ function BookSingle() {
             {/* <p>Author: {writer?.AuthorName}</p> */}
             <p>Genre: {genres.bookGenre} </p>
             <p>Description: {singleBook.bookDescription}</p>
-            <p>Released On: {moment(singleBook.released).format("MMM Do YYYY")}</p>
+            <p>Released On: {moment(singleBook.released).format("MMM D YYYY")}</p>
             { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${singleBook._id}`}> manage book</a></p> : "" }
             <div className="audio-player">
               <audio controls>
