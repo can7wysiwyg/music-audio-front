@@ -106,6 +106,11 @@ function App() {
           {/* books end */}
         </div>
       </section>
+      <div className='books_category'>
+
+
+
+      </div>
     </>
   );
 }
