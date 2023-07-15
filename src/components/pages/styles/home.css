@@ -1,109 +1,22 @@
-/* Header */
-.header-image {
-    background-image: url("../../images/bg.jpg");
-    background-size: cover;
-    background-position: center;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .header-text {
-    color: #fff;
-  }
-  
-  /* Animations */
-  .animated {
-    animation-duration: 1s;
-    animation-fill-mode: both;
-  }
-  
-  @keyframes fadeInDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes fadeInLeft {
-    0% {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  @keyframes fadeInRight {
-    0% {
-      opacity: 0;
-      transform: translateX(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+body {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.headline {
+  left: 130px;
+} 
+.clipped {
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 0% 100%);
+}
+@media screen and (max-width: 650px){
+  .headline {
+    left: 20px;
+  } 
+  .clipped {
+    clip-path: none;
+    max-height: 300px !important;
+    
   }
-  
-  .spin-animation {
-    animation: spin 2s linear;
-  }
-  
-  
-  /* Section */
-  .container {
-    margin-top: 40px;
-  }
-  
-  .container h2 {
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .container p {
-    color: #777;
-    line-height: 1.5;
-  }
-  
-  .container img {
-    max-width: 100%;
-  }
-  
-  /* Media Query for Small Screens */
-  @media (max-width: 768px) {
-    .container {
-      margin-top: 20px;
-    }
-  
-    .container h2 {
-      font-size: 24px;
-    }
-  }
+}

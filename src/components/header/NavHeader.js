@@ -6,7 +6,7 @@ import {
   Nav,
   NavDropdown
 } from "react-bootstrap";
-import "./header.css";
+// import "./header.css";
 import axios from "axios";
 
 function NavHeader() {
@@ -72,19 +72,20 @@ function NavHeader() {
   };
 
   return (
-    <>
-      <Navbar bg="dark" expand="lg">
-        {Webname()}
-        <Navbar.Toggle aria-controls="navbarNav" />
-        <Navbar.Collapse id="navbarNav">
-          {AdminLogin()}
-          <Nav className="mr-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/authors">Authors</Nav.Link>
-            <Nav.Link href="/books">Books</Nav.Link>
-            <Nav.Link href="/new_books">New Books</Nav.Link>
-            <Nav.Link href="/search_books">Search Books</Nav.Link>
-            <NavDropdown title="Book Genres" id="basic-nav-dropdown">
+
+    <div className="container">
+      <Navbar expand="lg" variant="warning" bg="warning" fixed="top">
+        <div className="container">
+          {Webname()}
+          <Navbar.Toggle aria-controls="navbarResponsive" />
+          <Navbar.Collapse id="navbarResponsive">
+            {AdminLogin()}
+            <Nav className="ms-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/authors">Authors</Nav.Link>
+              <Nav.Link href="/books">Books</Nav.Link>
+              <Nav.Link href="/search_books">Search Books</Nav.Link>
+              <NavDropdown title="Book Genres" id="basic-nav-dropdown">
               {categories?.map((category) => {
                 return (
                   <NavDropdown.Item
@@ -98,11 +99,20 @@ function NavHeader() {
             </NavDropdown>
             <Nav.Link href="/about">About Us</Nav.Link>
             <Nav.Link href="/contact">Contact Us</Nav.Link>
-          </Nav>
-                   {isLogged ? loggedRouter() : ""}
-        </Navbar.Collapse>
+
+              
+            </Nav>
+          </Navbar.Collapse>
+        </div>
       </Navbar>
-    </>
+      {isLogged ? loggedRouter() : ''}
+    </div>
+   
+
+
+
+
+      
   );
 }
 
