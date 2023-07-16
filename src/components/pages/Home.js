@@ -93,43 +93,46 @@ function Home() {
         />
       </a>
 
-      {/* New section */}
-      <section className="trending-section">
-        <div className="container">
-          <h2
-            className="section-title text-center"
-            style={{ fontStyle: "oblique" }}
-          >
-            Trending  Voices
-          </h2>
-          {/* Add content for the trending books */}
+      {/* trending section */}
 
-          <div className="container py-5">
-          <div className="row justify-content-center">
-            {trendingVoices.map(voice => (
-              <div className="col-12 col-lg-4" key={voice.id}>
-                <div className="card box-shadow mx-auto my-5" style={{ width: "18rem" }}>
-                  <img src={voice.AuthorImage} className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <h5 className="card-title">{voice.AuthorName}</h5>
-                    <hr />
-                    <p className="card-text">{voice.AuthorEmail}</p>
-                  </div>
+      <section className="trending-section">
+  <div className="container">
+    <h2 className="section-title text-center" style={{ fontStyle: "oblique" }}>
+      Trending Voices
+    </h2>
+
+    <div className="container py-5">
+      <div className="row justify-content-center">
+        {trendingVoices.map(voice => (
+          <div className="col-12 col-lg-4" key={voice._id}>
+            <div className="card box-shadow mx-auto my-5 feat" style={{ width: "18rem" }}>
+              <img src={voice.AuthorImage} className="card-img-top" alt="..." />
+              <div className="card-body d-flex flex-column justify-content-between feat-body" style={{ height: "100%" }}>
+                <div>
+                  <h5 className="card-title feat-title">{voice.AuthorName}</h5>
+                  <hr />
+                  <p className="card-text">{voice.AuthorEmail}</p>
+                </div>
+                <div>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                     <path fill="#ffffff" fillOpacity="1" d="M0,192L48,197.3C96,203,192,213,288,192C384,171,480,117,576,90.7C672,64,768,64,864,85.3C960,107,1056,149,1152,186.7C1248,224,1344,256,1392,272L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                   </svg>
-                  <a href="/">
+                  <a href={`/author_single/${voice._id}`}>
                     <i className="fas fa-play ikon"></i>
                   </a>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-          
+     
+      
+          {/*end trending voices  */}
         
       <div className="services" style={{ marginTop: "3rem", background: "linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%)" }}>
       <h1 className="text-center" style={{ fontFamily: "fantasy", fontStyle: "revert" }}>
