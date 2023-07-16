@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import "./styles/books.css";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { GlobalState } from "../../GlobalState";
 import { useSpring, animated } from 'react-spring';
+import { Flipper, Flipped } from 'react-flip-toolkit';
+
 
 
 function Books() {
@@ -103,6 +105,11 @@ const DisplayBooks = ({ audioItem }) => {
   const state = useContext(GlobalState)
   const [isLogged] = state.userApi.isLogged;
    const[isAdmin] = state.userApi.isAdmin
+   const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
 
 
   useEffect(() => {
@@ -127,11 +134,49 @@ const DisplayBooks = ({ audioItem }) => {
   
     
   function listBooksDisplay() {
+
+  
+
       
       
       return (
         <>
-          <div className="book-card">
+
+<div className="container d-flex justify-content-center my-4 mb-5">
+
+<Flipper flipKey={isFlipped}>
+  <div className="card" onClick={handleFlip}>
+    <div className="card-front">
+      <Flipped flipId="card-front">
+        <div className="card-body">
+          <img src={audioItem.audioImage} alt="Card Front" className="card-image" />
+          <h5 className="card-title">Animated Card</h5>
+          <p className="card-text">Click to flip the card</p>
+        </div>
+      </Flipped>
+    </div>
+    <div className="card-back">
+      <Flipped flipId="card-back">
+        <div className="card-body">
+          <h5 className="card-title">Card Back</h5>
+          <audio controls>
+            <source src={audioItem.audioBook} type="audio/mpeg" />
+          </audio>
+        </div>
+      </Flipped>
+    </div>
+  </div>
+</Flipper>
+
+
+
+  
+</div>
+
+
+
+
+          {/* <div className="book-card">
             <div className="image-container">
               <img className="book-image" src={audioItem.audioImage} alt="Book 1" />
             </div>
@@ -149,7 +194,7 @@ const DisplayBooks = ({ audioItem }) => {
               </div>
             </div>
           </div>
-          <br />
+          <br /> */}
         </>
       );
    
