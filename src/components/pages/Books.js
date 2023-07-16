@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import "./styles/books.css";
 import axios from "axios";
-import { useContext, useRef } from "react";
-import { GlobalState } from "../../GlobalState";
 import { useSpring, animated } from 'react-spring';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 
@@ -102,9 +100,6 @@ function Books() {
 const DisplayBooks = ({ audioItem }) => {
   const [writers, setWriters] = useState([]);
   const [newWriters, setNewWriters] = useState({});
-  const state = useContext(GlobalState)
-  const [isLogged] = state.userApi.isLogged;
-   const[isAdmin] = state.userApi.isAdmin
    const [isFlipped, setIsFlipped] = useState(false);
 
   const handleFlip = () => {
@@ -144,31 +139,36 @@ const DisplayBooks = ({ audioItem }) => {
 
 <div className="container d-flex justify-content-center my-4 mb-5">
 <Flipper flipKey={isFlipped}>
-  <div className="card" onClick={handleFlip}>
+  <div className="card" onMouseOver={handleFlip}>
     <div className="card-front">
       <Flipped flipId="card-front">
         <div className="card-body">
           <img src={audioItem.audioImage} alt="Card Front" className="card-image" />
           <div className="card-details">
-            <h5 className="card-title">{audioItem.title}</h5>
-            <p className="card-text">{audioItem.description}</p>
+            <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }} className="card-title">{audioItem.bookTitle}</a>
+            <p className="card-text">{newWriters.AuthorName}</p>
           </div>
         </div>
       </Flipped>
     </div>
+
     <div className="card-back">
-      <Flipped flipId="card-back">
-        <div className="card-body">
-          <h5 className="card-title">Book Audio</h5>
-          <div className="audio-player">
-  <audio controls>
-    <source src={audioItem.audioBook} type="audio/mpeg" />
-  </audio>
+  <Flipped flipId="card-back">
+    <div className="card-body">
+      <h5 className="card-title">Book Audio</h5>
+      <div className="audio-container">
+        <div className="audio-player">
+          <audio controls>
+            <source src={audioItem.audioBook} type="audio/mpeg" />
+          </audio>
+        </div>
+      </div>
+    </div>
+  </Flipped>
 </div>
 
-        </div>
-      </Flipped>
-    </div>
+
+    
   </div>
 </Flipper>
 
@@ -180,25 +180,7 @@ const DisplayBooks = ({ audioItem }) => {
 
 
 
-          {/* <div className="book-card">
-            <div className="image-container">
-              <img className="book-image" src={audioItem.audioImage} alt="Book 1" />
-            </div>
-  
-            <div className="card-content">
-              <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }}>
-                {audioItem.bookTitle}
-              </a>
-              <p className="card-text">{newWriters.AuthorName}</p>
-              {isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${audioItem._id}`}> manage book</a></p> : ""}
-              <div className="audio-container">
-                <audio controls>
-                  <source src={audioItem.audioBook} type="audio/mpeg" />
-                </audio>
-              </div>
-            </div>
-          </div>
-          <br /> */}
+          
         </>
       );
    
