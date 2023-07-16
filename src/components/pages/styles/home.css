@@ -80,7 +80,7 @@ h5{
 	filter:drop-shadow(2px -9px 4px rgba(0, 69, 134, 0.4));
 }
 
-i{
+.ikon{
 	position:absolute;
 	top: 18rem;
 	right: 2rem;
@@ -93,10 +93,14 @@ i{
 	transition: all .6s ease-in-out;
 }
 
-.card:hover i{
+.card:hover .ikon{
 	transform: rotate(-180deg);
 }
 
-i:hover{
+.ikon:hover{
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.7) 0px 18px 36px -18px inset;
+}
+
+#contact .xyz:hover .ion,#contact .xyz:hover h4{
+	color: #87d37c;
 }

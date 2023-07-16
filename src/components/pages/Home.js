@@ -1,37 +1,69 @@
-import React from 'react';
-import "./styles/home.css"
-import Hero2 from "../images/hh.png"
-import localImage from "../images/hello.avif"
-import Image1 from "../images/img1.jpg"
-import Image2 from "../images/img2.jpg"
-import Image3 from "../images/audiogirl.jpg"
+import React, { useState } from "react";
+import "./styles/home.css";
+import Hero2 from "../images/hh.png";
+import localImage from "../images/hello.avif";
+import Image1 from "../images/img1.jpg";
+import Image2 from "../images/img2.jpg";
+import Image3 from "../images/audiogirl.jpg";
 
 
 
-function App() {
+
+
+
+function Home() {
+
+
+    const [hoveredCard, setHoveredCard] = useState(null);
+  
+    const handleCardHover = (index) => {
+      setHoveredCard(index);
+    };
+  
+    const handleCardLeave = () => {
+      setHoveredCard(null);
+    };
+  
+    const isCardHovered = (index) => {
+      return hoveredCard === index;
+    };
+
+  
+  
   return (
     <>
-      <div className="d-sm-flex align-items-center justify-content-between w-100" style={{ height: '100vh' }}>
-        <div className="col-md-4 mx-auto mb-4 mb-sm-0 headline" style={{ margin: "3rem" }}>
-
-          <h1 className="display-4 my-4 font-weight-bold" style={{ margin: "2rem" }}>
-            Welcome To <span style={{ color: '#9B5DE5' }}>Book Voices</span>
+      <div
+        className="d-sm-flex align-items-center justify-content-between w-100"
+        style={{ height: "100vh" }}
+      >
+        <div
+          className="col-md-4 mx-auto mb-4 mb-sm-0 headline"
+          style={{ margin: "3rem" }}
+        >
+          <h1
+            className="display-4 my-4 font-weight-bold"
+            style={{ margin: "2rem" }}
+          >
+            Welcome To <span style={{ color: "#9B5DE5" }}>Book Voices</span>
           </h1>
 
-          <a href="/books" className="btn px-5 py-3 text-white mt-3 mt-sm-0" style={{ borderRadius: '30px', backgroundColor: '#9B5DE5' }}>
+          <a
+            href="/books"
+            className="btn px-5 py-3 text-white mt-3 mt-sm-0"
+            style={{ borderRadius: "30px", backgroundColor: "#9B5DE5" }}
+          >
             Get Started
           </a>
         </div>
         <div
           className="col-md-8 h-100 clipped"
           style={{
-            minHeight: '350px',
+            minHeight: "350px",
             backgroundImage: `url(${localImage})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
+            backgroundPosition: "center",
+            backgroundSize: "cover",
           }}
         ></div>
-
       </div>
       <a href="https://componentity.com" className="block">
         <img
@@ -45,74 +77,233 @@ function App() {
       {/* New section */}
       <section className="trending-section">
         <div className="container">
-          <h2 className="section-title text-center" style={{fontStyle: "oblique"}}>Trending Book Voices</h2>
+          <h2
+            className="section-title text-center"
+            style={{ fontStyle: "oblique" }}
+          >
+            Trending  Voices
+          </h2>
           {/* Add content for the trending books */}
 
-
           <div className="container py-5">
-      <div className="row justify-content-center">
-        <div className="col-12 col-lg-4">
-          <div className="card box-shadow mx-auto my-5" style={{ width: '18rem' }}>
-            <img src={Image1} className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Anémone</h5>
-              <hr />
-              <p className="card-text">Some quick example</p>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-              <path fill="#ffffff" fillOpacity="1" d="M0,192L48,197.3C96,203,192,213,288,192C384,171,480,117,576,90.7C672,64,768,64,864,85.3C960,107,1056,149,1152,186.7C1248,224,1344,256,1392,272L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
-            <a href="/"><i className="fas fa-play"></i></a>
-          </div>
-        </div>
+            <div className="row justify-content-center">
+              <div className="col-12 col-lg-4">
+                <div
+                  className="card box-shadow mx-auto my-5"
+                  style={{ width: "18rem" }}
+                >
+                  <img src={Image1} className="card-img-top" alt="..." />
+                  <div className="card-body">
+                    <h5 className="card-title">Anémone</h5>
+                    <hr />
+                    <p className="card-text">Some quick example</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 1440 320"
+                  >
+                    <path
+                      fill="#ffffff"
+                      fillOpacity="1"
+                      d="M0,192L48,197.3C96,203,192,213,288,192C384,171,480,117,576,90.7C672,64,768,64,864,85.3C960,107,1056,149,1152,186.7C1248,224,1344,256,1392,272L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                    ></path>
+                  </svg>
+                  <a href="/">
+                    <i className="fas fa-play ikon"></i>
+                  </a>
+                </div>
+              </div>
 
-        <div className="col-12 col-lg-4">
-          <div className="card box-shadow my-5 mx-auto" style={{ width: '18rem' }}>
-            <img src={Image2} className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Tulipe</h5>
-              <hr />
-              <p className="card-text">Some quick example</p>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-              <path fill="#ffffff" fillOpacity="1" d="M0,64L48,53.3C96,43,192,21,288,58.7C384,96,480,192,576,218.7C672,245,768,203,864,154.7C960,107,1056,53,1152,32C1248,11,1344,21,1392,26.7L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
-            <a href="/"><i className="fas fa-play"></i></a>
-          </div>
-        </div>
+              <div className="col-12 col-lg-4">
+                <div
+                  className="card box-shadow my-5 mx-auto"
+                  style={{ width: "18rem" }}
+                >
+                  <img src={Image2} className="card-img-top" alt="..." />
+                  <div className="card-body">
+                    <h5 className="card-title">Tulipe</h5>
+                    <hr />
+                    <p className="card-text">Some quick example</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 1440 320"
+                  >
+                    <path
+                      fill="#ffffff"
+                      fillOpacity="1"
+                      d="M0,64L48,53.3C96,43,192,21,288,58.7C384,96,480,192,576,218.7C672,245,768,203,864,154.7C960,107,1056,53,1152,32C1248,11,1344,21,1392,26.7L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                    ></path>
+                  </svg>
+                  <a href="/">
+                    <i className="fas fa-play ikon"></i>
+                  </a>
+                </div>
+              </div>
 
-        <div className="col-12 col-lg-4">
-          <div className="card box-shadow mx-auto my-5" style={{ width: '18rem' }}>
-            <img src={Image3} className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Lycoris</h5>
-              <hr />
-              <p className="card-text">Some quick example</p>
+              <div className="col-12 col-lg-4">
+                <div
+                  className="card box-shadow mx-auto my-5"
+                  style={{ width: "18rem" }}
+                >
+                  <img src={Image3} className="card-img-top" alt="..." />
+                  <div className="card-body">
+                    <h5 className="card-title">Lycoris</h5>
+                    <hr />
+                    <p className="card-text">Some quick example</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 1440 320"
+                  >
+                    <path
+                      fill="#ffffff"
+                      fillOpacity="1"
+                      d="M0,256L48,256C96,256,192,256,288,245.3C384,235,480,213,576,181.3C672,149,768,107,864,112C960,117,1056,171,1152,186.7C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                    ></path>
+                  </svg>
+                  <a href="/">
+                    <i className="fas fa-play ikon"></i>
+                  </a>
+                </div>
+              </div>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-              <path fill="#ffffff" fillOpacity="1" d="M0,256L48,256C96,256,192,256,288,245.3C384,235,480,213,576,181.3C672,149,768,107,864,112C960,117,1056,171,1152,186.7C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
-            <a href="/"><i className="fas fa-play"></i></a>
+          </div>
+
+          {/* books end */}
+        </div>
+      </section>
+
+      <div className="services" style={{ marginTop: "3rem", background: "linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%)" }}>
+      <h1 className="text-center" style={{ fontFamily: "fantasy", fontStyle: "revert" }}>
+        <span>Our</span> <span style={{ color: "red" }}>Serv</span>
+        <span style={{ color: "green" }}>ices</span>{" "}
+      </h1>
+      <div className="container" style={{ fontFamily: "Times New Roman"}}>
+        <div className="row" >
+          <div
+            className="col-md-4"
+            onMouseEnter={() => handleCardHover(0)}
+            onMouseLeave={handleCardLeave}
+            style={{  marginBottom: "2rem"}}
+          >
+            <div
+              className={`card ${isCardHovered(0) ? 'hovered' : ''}`}
+              style={{ width: "18rem", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
+            >
+              <div className="card-body">
+                <h5 className="card-title text-center">
+                  <i className="fas fa-headphones fa-3x"></i>
+                </h5>
+                <h3 className="card-title mb-2 text-muted">Book Adertising</h3>
+                <p className="card-text">
+                  We use audio excerpts to advertise your books. Get in touch with us!! And we will give you a bestseller..
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="col-md-4"
+            onMouseEnter={() => handleCardHover(1)}
+            onMouseLeave={handleCardLeave}
+            style={{  marginBottom: "2rem"}}
+          >
+            <div
+              className={`card ${isCardHovered(1) ? 'hovered' : ''}`}
+              style={{ width: "18rem", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
+            >
+              <div className="card-body">
+                <h5 className="card-title text-center">
+                  <i className="fas fa-dollar-sign fa-3x"></i>
+                </h5>
+                <h3 className="card-title mb-2 text-muted">Book Selling</h3>
+                <p className="card-text">
+                  We have a full-fledged e-commerce site for selling books. We sell your books for free!!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="col-md-4"
+            onMouseEnter={() => handleCardHover(2)}
+            onMouseLeave={handleCardLeave}
+            style={{  marginBottom: "2rem"}}
+          >
+            <div
+              className={`card ${isCardHovered(2) ? 'hovered' : ''}`}
+              style={{ width: "18rem", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
+            >
+              <div className="card-body">
+                <h5 className="card-title text-center">
+                  <i className="fas fa-book fa-3x"></i>
+                </h5>
+                <h3 className="card-title mb-2 text-muted">Book Library</h3>
+                <p className="card-text">
+                  Are you looking to borrow books? Well, we got you covered.. We also have an online library.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
+    {/* contact us section */}
 
 
-
-
-
-          {/* books end */}
+    <section id="contact">
+      <div className="container">
+        <h3 className="text-center text-uppercase">contact us</h3>
+        <p className="text-center w-75 m-auto">
+         Get in touch with us for more in-person information...
+        </p>
+        <div className="row">
+          <div className="col-md-4">
+            <div className="card border-0 xyz">
+              <div className="card-body text-center">
+                <i className="fa fa-phone fa-5x mb-3 ion" aria-hidden="true"></i>
+                <h4 className="text-uppercase mb-5">call us</h4>
+                <p>+2659968xxx,+2658823xxxx</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="card border-0 xyz">
+              <div className="card-body text-center">
+                <i className="fa fa-map-marker fa-5x mb-3 ion" aria-hidden="true"></i>
+                <h4 className="text-uppercase mb-5">office location</h4>
+                <address>Limbe, Blantyre 4, Malawi</address>
+              </div>
+            </div>
+          </div>
+          
+          <div className="col-md-4 ">
+            <div className="card border-0 xyz">
+              <div className="card-body text-center">
+                <i className="fa fa-globe fa-5x mb-3 ion" aria-hidden="true"></i>
+                <h4 className="text-uppercase mb-5">email</h4>
+                <p>hugostoltz12@proton.me</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-      <div className='books_category'>
-
-
-
       </div>
-    </>
-  );
-}
+    </section>
 
-export default App;
+
+
+
+
+
+    {/* end contact us section... */}
+
+      
+      
+
+          </>
+  );
+} 
+
+export default Home;
