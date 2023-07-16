@@ -143,25 +143,29 @@ const DisplayBooks = ({ audioItem }) => {
         <>
 
 <div className="container d-flex justify-content-center my-4 mb-5">
-
 <Flipper flipKey={isFlipped}>
   <div className="card" onClick={handleFlip}>
     <div className="card-front">
       <Flipped flipId="card-front">
         <div className="card-body">
           <img src={audioItem.audioImage} alt="Card Front" className="card-image" />
-          <h5 className="card-title">Animated Card</h5>
-          <p className="card-text">Click to flip the card</p>
+          <div className="card-details">
+            <h5 className="card-title">{audioItem.title}</h5>
+            <p className="card-text">{audioItem.description}</p>
+          </div>
         </div>
       </Flipped>
     </div>
     <div className="card-back">
       <Flipped flipId="card-back">
         <div className="card-body">
-          <h5 className="card-title">Card Back</h5>
-          <audio controls>
-            <source src={audioItem.audioBook} type="audio/mpeg" />
-          </audio>
+          <h5 className="card-title">Book Audio</h5>
+          <div className="audio-player">
+  <audio controls>
+    <source src={audioItem.audioBook} type="audio/mpeg" />
+  </audio>
+</div>
+
         </div>
       </Flipped>
     </div>
