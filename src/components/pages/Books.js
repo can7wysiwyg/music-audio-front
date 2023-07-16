@@ -139,7 +139,7 @@ const DisplayBooks = ({ audioItem }) => {
 
 <div className="container d-flex justify-content-center my-4 mb-5">
 <Flipper flipKey={isFlipped}>
-  <div className="card" onMouseOver={handleFlip}>
+  <div className="card flipping" onMouseOver={handleFlip}>
     <div className="card-front">
       <Flipped flipId="card-front">
         <div className="card-body">
