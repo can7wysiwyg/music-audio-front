@@ -106,12 +106,24 @@ function Home() {
         {trendingVoices.map(voice => (
           <div className="col-12 col-lg-4" key={voice._id}>
             <div className="card box-shadow mx-auto my-5 feat" style={{ width: "18rem" }}>
+            <div className="feat-image-container">
               <img src={voice.AuthorImage} className="card-img-top" alt="..." />
+              </div>
               <div className="card-body d-flex flex-column justify-content-between feat-body" style={{ height: "100%" }}>
                 <div>
-                  <h5 className="card-title feat-title">{voice.AuthorName}</h5>
+                  <h5 className="card-title feat-title">
+
+                  <a
+                  href={`/view_single/${voice._id}`}
+                  style={{ color: "blue", textDecoration: "none" }}
+                  
+                >{voice.AuthorName}</a>
+             
+
+                  </h5>
                   <hr />
                   <p className="card-text">{voice.AuthorEmail}</p>
+                  <hr />
                 </div>
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

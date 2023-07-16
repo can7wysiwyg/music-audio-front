@@ -2,8 +2,6 @@ import axios from "axios";
 import "./styles/authors.css";
 import { useState, useEffect } from "react";
 import { Row, Col, Pagination, Form, Container } from "react-bootstrap";
-import { useContext } from "react";
-import { GlobalState } from "../../GlobalState";
 
 function Authors() {
   const [results, setAuthors] = useState([]);
@@ -53,9 +51,13 @@ function Authors() {
 
   return (
     <Container>
-      <div className="container d-flex justify-content-center align-items-center ">
+            <div className=" justify-content-center ">
+              <br />
+              <br />
+              <br />
+             
         <div className="col-md-6">
-          <Form>
+          <Form style={{marginBottom: "3rem!important"}}>
             <Form.Group className="d-flex justify-content-center">
               <Form.Control
                 type="text"
@@ -97,57 +99,53 @@ function Authors() {
 }
 
 const DisplayAuthors = ({ result }) => {
-  const state = useContext(GlobalState);
-  const [isLogged] = state.userApi.isLogged;
-  const[isAdmin] = state.userApi.isAdmin
-
-
-
+  
   function authorsOnDisplay() {
     
       return (
         <>
-          <div className="author-card">
-            <figure>
-              <img
-                className="author-pic"
-                src={result.AuthorImage}
-                alt={result.AuthorName}
-              />
-            </figure>
-            <div>
+
+
+<div className="container py-5">
+  <div className="row">
+    <div className="col-md-4">
+      <div className="card box-shadow mx-auto my-5 feat" style={{ width: "18rem" }}>
+        <div className="feat-image-container">
+          <img src={result.AuthorImage} className="card-img-top" alt="..." />
+        </div>
+        <div className="card-body d-flex flex-column justify-content-between feat-body">
+          <div>
+            <h5 className="card-title feat-title"> 
               <a
-                href={`/author_single/${result._id}`}
-                className="card-title"
-                style={{ textDecoration: "none" }}
-              >
-                {result.AuthorName}
-              </a>
-              <p className="card-text">Email: {result.AuthorEmail}</p>
-              <p className="card-text">
-                Phone Number: {result.AuthorPhoneNumber}
-              </p>
-              <p className="card-text">Location: {result.AuthorLocation}</p>
-              {isLogged === true && isAdmin === true ? (
-             <p className="card-text">   <a
                   href={`/view_single/${result._id}`}
-                  style={{ color: "blue" }}
+                  style={{ color: "blue", textDecoration: "none" }}
                   
-                >
-                  manage user
-                </a> </p>
-              ) : (
-                ""
-              )}
-              <a
-                href={`/authors_books/${result._id}`}
-                className="btn btn-primary"
-              >
-                View Author's Books
-              </a>
-            </div>
+                >{result.AuthorName}</a>
+                
+                
+                </h5>
+            <hr />
+            <p className="card-text">{result.AuthorEmail}</p>
+            <hr />
+            <p className="card-text"> {result.AuthorLocation}</p>
+            <hr />
+
+
           </div>
-          <br />
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+              <path fill="#ffffff" fillOpacity="1" d="M0,192L48,197.3C96,203,192,213,288,192C384,171,480,117,576,90.7C672,64,768,64,864,85.3C960,107,1056,149,1152,186.7C1248,224,1344,256,1392,272L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+            <a href={`/authors_books/${result._id}`}>
+              <i className="fas fa-play ikon"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
         </>
       );
    
