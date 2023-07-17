@@ -26,7 +26,7 @@ const AuthorsBooks = () => {
 
   if (cards.length === 0) {
     return (
-      <div className="container">
+      <div className="container" style={{marginTop: "5rem", marginBottom: "5rem"}}>
         <h1 className="text-center">Books are loading...</h1>
       </div>
     );

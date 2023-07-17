@@ -71,7 +71,7 @@ function SearchComponent() {
   }, [typingTimeout]);
 
   return (
-    <div className="container">
+    <div className="container"   style={{marginTop: "5rem"}}>
       <input
         type="text"
         value={query}

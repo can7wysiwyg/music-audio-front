@@ -65,17 +65,17 @@ function BookSingle() {
 
   if (Object.keys(singleBook).length < 8) {
     return (
-      <>
+      <div style={{marginTop: "5rem", marginBottom: "5rem"}}>
         <h1 className="text-center">please wait as audio loads</h1>
-      </>
+      </div>
     );
   }
 
   if (Object.keys(writer).length < 8) {
     return (
-      <>
+      <div style={{marginTop: "5rem", marginBottom: "5rem"}}>
         <h1 className="text-center">please wait...</h1>
-      </>
+      </div>
     );
   }
 
@@ -89,9 +89,11 @@ function BookSingle() {
           <div
             className={`book-details ${fadeIn ? "fade-in" : ""}`}
             ref={bookDetailsRef}
+
+            style={{ marginTop: "3rem", textAlign: "center", fontFamily: "Helvetica" }}
           >
             <h2>{singleBook.bookTitle}</h2>
-            <img src={singleBook.audioImage} alt="Book Cover" />
+            <img src={singleBook.audioImage} alt="Book Cover" style={{width: "100%", height: "30vh", objectFit: "contain"}} />
             <a
               href={`/author_single/${writer._id}`}
               className="card-title"

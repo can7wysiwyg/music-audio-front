@@ -20,16 +20,15 @@ function Authors() {
 
   if (results.length === 0) {
     return (
-      <>
+      <div style={{marginTop: "5rem", marginBottom: "5rem"}}>
         <h1 className="text-center">😏😏😎😎😁😁 loading... </h1>
-      </>
+      </div>
     );
   }
 
   // Pagination logic
   const indexOfLastAuthor = currentPage * authorsPerPage;
   const indexOfFirstAuthor = indexOfLastAuthor - authorsPerPage;
-  // const currentAuthors = results.slice(indexOfFirstAuthor, indexOfLastAuthor);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -38,12 +37,12 @@ function Authors() {
     setCurrentPage(1);
   };
 
-  // Filter authors based on search term
+
   const filteredAuthors = results.filter((author) =>
     author.AuthorName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Update current authors based on search results
+
   const currentAuthorsFiltered = filteredAuthors.slice(
     indexOfFirstAuthor,
     indexOfLastAuthor
@@ -51,11 +50,8 @@ function Authors() {
 
   return (
     <Container>
-            <div className=" justify-content-center ">
-              <br />
-              <br />
-              <br />
-             
+            <div className=" container d-flex justify-content-center align-items-center " style={{marginTop: "5rem"}}>
+                          
         <div className="col-md-6">
           <Form style={{marginBottom: "3rem!important"}}>
             <Form.Group className="d-flex justify-content-center">
@@ -70,8 +66,7 @@ function Authors() {
         </div>
       </div>
 
-      <br />
-
+    
       <Row>
         {currentAuthorsFiltered.map((result, index) => (
           <Col key={index} md={4}>
@@ -117,7 +112,7 @@ const DisplayAuthors = ({ result }) => {
           <div>
             <h5 className="card-title feat-title"> 
               <a
-                  href={`/view_single/${result._id}`}
+                  href={`/author_single/${result._id}`}
                   style={{ color: "blue", textDecoration: "none" }}
                   
                 >{result.AuthorName}</a>

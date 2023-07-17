@@ -33,13 +33,13 @@ function Books() {
 
   if (audios.length === 0) {
     return (
-      <>
+      <div style={{marginTop: "5rem", marginBottom: "5rem"}}>
       <animated.div style={fadeProps}>
       <h1 className="text-center">books are loading cutie 🙂🙂🙂</h1>
     </animated.div>
         
         
-      </>
+      </div>
     );
   }
 
@@ -57,7 +57,7 @@ function Books() {
 
   return (
     <>
-      <div  className="container d-flex justify-content-center align-items-center " >
+      <div  className="container d-flex justify-content-center align-items-center "  style={{marginTop: "5rem"}} >
       <div className="col-md-6">
           <input
             type="text"
