@@ -139,7 +139,7 @@ const DisplayBooks = ({ audioItem }) => {
 
 <div className="container d-flex justify-content-center my-4 mb-5">
 <Flipper flipKey={isFlipped}>
-  <div className="card flipping" onMouseOver={handleFlip}>
+  <div className="card flipping" onClick={handleFlip}>
     <div className="card-front">
       <Flipped flipId="card-front">
         <div className="card-body">
@@ -155,7 +155,7 @@ const DisplayBooks = ({ audioItem }) => {
     <div className="card-back">
   <Flipped flipId="card-back">
     <div className="card-body">
-      <h5 className="card-title">Book Audio</h5>
+    <a href={`/book_single/${audioItem._id}`} style={{ textDecoration: "none" }} className="card-title">{audioItem.bookTitle}</a>
       <div className="audio-container">
         <div className="audio-player">
           <audio controls>
