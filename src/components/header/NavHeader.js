@@ -102,10 +102,11 @@ function NavHeader() {
 
               
             </Nav>
+            {isLogged ? loggedRouter() : ''}
           </Navbar.Collapse>
         </div>
       </Navbar>
-      {isLogged ? loggedRouter() : ''}
+     
     </div>
    
 

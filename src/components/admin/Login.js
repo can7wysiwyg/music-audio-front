@@ -32,7 +32,7 @@ const [values, setValues] = useState({email: "", password: ""})
 
   }
 
-    return(<>
+    return(< div style={{marginTop: "2rem"}}>
 
 <Container>
       <Row className="justify-content-md-center">
@@ -82,7 +82,7 @@ const [values, setValues] = useState({email: "", password: ""})
 
 
     
-    </>)
+    </div>)
 }
 
 export default Login

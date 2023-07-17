@@ -146,7 +146,7 @@ function Home() {
       
           {/*end trending voices  */}
         
-      <div className="services" style={{ marginTop: "3rem", background: "linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%)" }}>
+      <div className="services" style={{ marginTop: "1rem", background: "linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%)" }}>
       <h1 className="text-center" style={{ fontFamily: "fantasy", fontStyle: "revert" }}>
         <span>Our</span> <span style={{ color: "red" }}>Serv</span>
         <span style={{ color: "green" }}>ices</span>{" "}
