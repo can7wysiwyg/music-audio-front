@@ -5,7 +5,7 @@ function About() {
     return(<>
 
 
-<div class="container">
+<div class="container" style={{marginTop: "3rem"}}>
     <div class="jumbotron">
       <h3 class="display-4">Why You Should Advertise with Us...</h3>
       <div class="text-center">
