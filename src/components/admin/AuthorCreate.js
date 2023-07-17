@@ -51,7 +51,7 @@ function AuthorCreate() {
 
        
 
-    return(<>
+    return(<div style={{marginTop: "3rem"}}>
         <Container>
         <Row className="justify-content-md-center">
           <Col xs={12} md={6}>
@@ -127,7 +127,7 @@ function AuthorCreate() {
 
     
     
-    </>)
+    </div>)
 }
 
 export default AuthorCreate

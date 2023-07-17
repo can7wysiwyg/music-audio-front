@@ -2,7 +2,7 @@ import "./adminpanel.css"
 
 function AdminPanel() {
     return(<>
-    <div className="container">
+    <div className="container" style={{marginTop: "3rem"}}>
     <div className="row">
       <div className="col-md-4">
         <div className="menu-card card-primary">

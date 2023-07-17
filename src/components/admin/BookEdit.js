@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
-import {GlobalState} from "../../GlobalState"
+import { GlobalState } from '../../GlobalState';
 import { Card, Button, Modal, Pagination, Row, Col, Container } from 'react-bootstrap';
 
 function BookEdit() {
@@ -12,23 +12,21 @@ function BookEdit() {
 
   useEffect(() => {
     const getItems = async () => {
-      const res = await axios.get("https://audiobooksapi.onrender.com/audio/show_all");
+      const res = await axios.get('https://audiobooksapi.onrender.com/audio/show_all');
       setItems(res.data.books);
-    }
+    };
     getItems();
   }, []);
 
   if (items.length === 0) {
     return (
-      <>
-        <h1 className='text-center'>please wait....</h1>
-      </>
+      <div style={{marginTop: "2rem"}}>
+        <h1 className="text-center">please wait....</h1>
+      </div>
     );
   }
 
-  const filteredBooks = items.filter(book =>
-    book.bookTitle.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredBooks = items.filter((book) => book.bookTitle.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
@@ -41,23 +39,22 @@ function BookEdit() {
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1);
-  }
+  };
 
   return (
     <div className="book-list">
-      <Container>
-      <Row className="justify-content-md-center">
-        <Col xs={12} md={6}>
-      <input
-        type="text"
-        placeholder="Search by book title"
-        className='form-control'
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-
-      </Col>
-      </Row>
+      <Container style={{marginTop: "2rem"}}>
+        <Row className="justify-content-md-center">
+          <Col xs={12} md={6}>
+            <input
+              type="text"
+              placeholder="Search by book title"
+              className="form-control"
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+          </Col>
+        </Row>
       </Container>
       <br />
       <Row>
@@ -88,10 +85,11 @@ const BooksToEdit = ({ book }) => {
   const token = state.token;
   const [results, setAuthors] = useState([]);
   const [newAuthor, setNew] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const getAuthors = async () => {
-      const res = await axios.get("https://audiobooksapi.onrender.com/author/show_all");
+      const res = await axios.get('https://audiobooksapi.onrender.com/author/show_all');
       setAuthors(res.data.authors);
     };
     getAuthors();
@@ -104,8 +102,6 @@ const BooksToEdit = ({ book }) => {
       });
     }
   }, [book.authorName, results]);
-
-  const [showModal, setShowModal] = useState(false);
 
   const handleEdit = () => {
     setShowModal(true);
@@ -124,61 +120,63 @@ const BooksToEdit = ({ book }) => {
     window.location.href = '/book_edit';
   };
 
-  function ShowingItems() {
-    
-      return (
-        <>
-          <Card className="book-card mx-auto" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-            <div style={{ flex: 1 }}>
-              <Card.Img variant="top" src={book.audioImage} alt="Book Cover" />
-            </div>
-            <Card.Body style={{ flex: "auto", display: "flex", flexDirection: "column" }}>
-              <Card.Link href={`/book_single/${book._id}`} style={{ textDecoration: "none" }}>{book.bookTitle}</Card.Link>
-              <Card.Text>{newAuthor.AuthorName}</Card.Text>
-              <Card.Text style={{ flex: 1 }}>{book.bookDescription}</Card.Text>
-              <audio controls>
-                <source src={book.audioBook} type="audio/mpeg" />
-                Your browser does not support the audio element.
-              </audio>
-              <div className="btn-group">
-                <Button variant="primary" onClick={handleEdit}>Edit</Button>
-                <Button variant="danger" onClick={handleDelete}>Delete</Button>
-              </div>
-            </Card.Body>
-          
-          </Card>
-                  <Modal show={showModal} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Book</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <p>Edit the book's info:</p>
-              <ul>
-                <li>
-                  <a href={`/book_update_info/${book._id}`}>update book info</a>
-                </li>
-                <li>
-                  <a href={`/book_update_audio/${book._id}`}>update book audio</a>
-                </li>
-                <li>
-                  <a href={`/book_update_picture/${book._id}`}>update book picture</a>
-                </li>
-              </ul>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>Close</Button>
-            </Modal.Footer>
-          </Modal>
-        </>
-      );
-  
-  }
-
   return (
-    <>
-      {ShowingItems()}
-    </>
+    <div style={{marginBottom: "3rem", textAlign: "center"}}>
+      <Card className="book-item" style={{ height: '100%',  }}>
+        <div style={{margin: "1rem"}}>
+          <Card.Img
+            variant="top"
+            src={book.audioImage}
+            alt="Book Cover"
+            style={{ width: '100%', maxHeight: '30vh', objectFit: 'contain' }}
+          />
+        </div>
+        <Card.Body>
+          <Card.Link href={`/book_single/${book._id}`} style={{ textDecoration: 'none' }}>
+            {book.bookTitle}
+          </Card.Link>
+          <Card.Text>{newAuthor.AuthorName}</Card.Text>
+          {/* <Card.Text style={{ flex: 1 }}>{book.bookDescription}</Card.Text> */}
+          <audio controls>
+            <source src={book.audioBook} type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+          <div className="btn-group" >
+            <Button variant="primary" onClick={handleEdit}>
+              Edit
+            </Button>
+            <Button variant="danger" onClick={handleDelete}>
+              Delete
+            </Button>
+          </div>
+        </Card.Body>
+      </Card>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Book</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Edit the book's info:</p>
+          <ul>
+            <li>
+              <a href={`/book_update_info/${book._id}`}>update book info</a>
+            </li>
+            <li>
+              <a href={`/book_update_audio/${book._id}`}>update book audio</a>
+            </li>
+            <li>
+              <a href={`/book_update_picture/${book._id}`}>update book picture</a>
+            </li>
+          </ul>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
-}
+};
 
 export default BookEdit;

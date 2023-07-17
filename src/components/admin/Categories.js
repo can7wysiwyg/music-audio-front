@@ -52,14 +52,14 @@ const Categories = () => {
   const currentCategories = categories.slice(indexOfFirstCategory, indexOfLastCategory);
 
   return (
-    <div className="container">
-      <h1>Category Management</h1>
+    <div className="container" style={{marginTop: "3rem"}}>
+      <h1 style={{fontFamily: "cursive"}}>Category Management</h1>
 
       {/* Form */}
       <div className="row">
         <div className="col-md-6">
           <form onSubmit={handleFormSubmit}>
-            <div className="form-group">
+            <div className="form-group" style={{marginBottom: "1rem"}}>
               <label htmlFor="categoryName">Category Name</label>
               <input
                 type="text"

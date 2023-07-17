@@ -34,7 +34,7 @@ function BookUpdatePicture() {
 
 
 
-    return(<>
+    return(<div style={{marginTop: "2rem"}}>
 
 <Container>
         <Row className="justify-content-md-center">
@@ -61,7 +61,7 @@ function BookUpdatePicture() {
 
     
     
-    </>)
+    </div>)
 }
 
 export default BookUpdatePicture

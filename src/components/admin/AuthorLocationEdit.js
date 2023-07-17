@@ -28,10 +28,10 @@ function AuthorLocationEdit() {
   };
 
 
-    return(<>
+    return(<div style={{marginTop: "3rem"}}>
     <div className="container d-flex justify-content-center align-items-center">
       <div className="col-md-6">
-        <h1 className="mb-4">Update Author's Location</h1>
+        <h1 className="mb-4" style={{fontFamily: "fantasy"}}>Update Author's Location</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <input
@@ -54,7 +54,7 @@ function AuthorLocationEdit() {
     
     
     
-    </>)
+    </div>)
 }
 
 export default AuthorLocationEdit

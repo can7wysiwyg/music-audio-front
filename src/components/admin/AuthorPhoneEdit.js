@@ -28,12 +28,12 @@ function AuthorPhoneEdit() {
     
 
 
-    return(<>
+    return(<div style={{marginTop: "3rem"}}>
     <Container>
         <Row className="justify-content-md-center">
           <Col xs={12} md={6}>
-            <h4>Update Author's Phone Number </h4>
-            <Form onSubmit={handleSubmit}>
+            <h4 style={{fontFamily: "fantasy", }}> Update Author's Phone Number </h4>
+            <Form onSubmit={handleSubmit} style={{marginTop: "1rem"}}>
               
               <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
                 
@@ -54,7 +54,7 @@ function AuthorPhoneEdit() {
 
     
     
-    </>)
+    </div>)
 }
 
 export default AuthorPhoneEdit

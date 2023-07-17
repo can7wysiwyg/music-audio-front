@@ -3,6 +3,7 @@ import { Card, Button, Modal, Row, Col, Pagination, Form } from 'react-bootstrap
 import axios from 'axios';
 import { useContext } from 'react';
 import { GlobalState } from '../../GlobalState';
+import "./authoredit.css"
 
 function AuthorEdit() {
   const [results, setAuthors] = useState([]);
@@ -47,7 +48,7 @@ function AuthorEdit() {
 
   return (
     <>
-    <div  className="container d-flex justify-content-center align-items-center " >
+    <div  className="container d-flex justify-content-center align-items-center " style={{marginTop: "2rem"}} >
       <div className="col-md-6">
       <Form>
         <Form.Group controlId="searchForm">
@@ -64,7 +65,7 @@ function AuthorEdit() {
       </div>
       <br />
 
-      <Row>
+      <Row style={{marginTop: "3rem"}}>
         {currentAuthors.map((result) => (
           <Col key={result._id} md={4} className="d-flex align-items-stretch">
             <EditAuthors result={result} />
@@ -72,7 +73,7 @@ function AuthorEdit() {
         ))}
       </Row>
 
-      <Pagination className="justify-content-center">
+      <Pagination className="justify-content-center" style={{marginTop: "2rem"}}>
         <Pagination.Prev
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
@@ -149,12 +150,12 @@ const EditAuthors = ({ result }) => {
    
       return (
         <>
-          <Card className="author-card d-flex flex-column">
+          <Card className="author-card d-flex flex-column author-card ">
             <Card.Img
               variant="top"
               src={result.AuthorImage}
               alt="Author Image"
-              style={{ width: '100%', height: '200px', borderRadius: '10px', objectFit: 'cover' }}
+              style={{ width: "100%", height: "30vh",  objectFit: 'contain' }}
               className="card-image"
             />
 
@@ -164,7 +165,7 @@ const EditAuthors = ({ result }) => {
                 <Card.Link href={`/author_single/${result._id}`}>More Info</Card.Link>
               </div>
               <pre> </pre>
-              <div className="btn-group">
+              <div className="btn-group" style={{margin: "1rem"}}>
                 <Button variant="primary" onClick={handleEdit}>
                   Edit
                 </Button>

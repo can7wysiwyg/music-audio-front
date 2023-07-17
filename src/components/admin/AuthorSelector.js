@@ -23,9 +23,9 @@ function AuthorSelector() {
 
   if (results.length === 0) {
     return (
-      <>
+      <div style={{marginTop: "3rem"}}>
         <h1 className="text-center">😏😏😎😎😁😁 Loading...</h1>
-      </>
+      </div>
     );
   }
 
@@ -48,7 +48,7 @@ function AuthorSelector() {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center">Select an Author to Upload a Book For</h1>
+      <h1 className="text-center" style={{fontFamily: "fantasy"}}>Select an Author to Upload a Book For</h1>
       <div className="search-container mb-4">
         <input
           type="text"
@@ -106,7 +106,7 @@ const AuthorsList = ({ result }) => {
                 overlay={<Tooltip>{result.AuthorName}</Tooltip>}
               >
                 <div className="avatar-wrapper">
-                  <img className="avatar" src={result.AuthorImage} alt={result.AuthorName} />
+                  <img className="avatar" src={result.AuthorImage} alt={result.AuthorName} style={{width: "30%", maxHeight: "9v", objectFit: "contain"}} />
                 </div>
               </OverlayTrigger>
             </div>

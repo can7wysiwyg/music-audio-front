@@ -28,10 +28,10 @@ function AuthorEmailEdit() {
   };
 
 
-    return(<>
+    return(<div style={{marginTop: "3rem"}}>
     <div className="container d-flex justify-content-center align-items-center">
       <div className="col-md-6">
-        <h1 className="mb-4">Update Author's Email</h1>
+        <h1 className="mb-4" style={{fontFamily: "fantasy"}}>Update Author's Email</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <input
@@ -44,7 +44,7 @@ function AuthorEmailEdit() {
               onChange={handleChange}
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-secondary">
             Update Author's Email
           </button>
         </form>
@@ -54,7 +54,7 @@ function AuthorEmailEdit() {
     
     
     
-    </>)
+    </div>)
 }
 
 export default AuthorEmailEdit

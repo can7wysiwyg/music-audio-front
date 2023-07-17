@@ -97,7 +97,7 @@ function ViewSingle() {
             <Row className="justify-content-md-center">
             <Col md={6}  >
               <Card className="author-card d-flex align-items-center justify-content-center" >
-                <Card.Img variant="top" src={author.AuthorImage} alt="Book Image" width="50%" />
+                <Card.Img variant="top" src={author.AuthorImage} alt="Book Image" style={{width: "100%", maxHeight: "30vh", objectFit: "contain"}} />
                 <Card.Body>
                   <Card.Title>{author.AuthorName}</Card.Title>
                  

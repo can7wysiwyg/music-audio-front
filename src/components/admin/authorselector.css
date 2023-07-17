@@ -18,6 +18,7 @@
   .avatar-container {
 
     width: 20%;
+    object-fit: contain;
     /* flex-shrink: 0; */
   }
   

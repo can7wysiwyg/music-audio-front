@@ -6,8 +6,8 @@ const UpdateList = () => {
     const{id} = useParams()
     
   return (
-    <div className="container">
-      <h1>What would you like to update?</h1>
+    <div className="container" style={{marginTop: "3rem", textAlign: "center"}}>
+      <h1 style={{fontFamily: "cursive"}}>What would you like to update?</h1>
       <ul className="list-group">
         <li className="list-group-item">
           <a href={`/book_title/${id}`}>Book Title</a>

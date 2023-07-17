@@ -33,12 +33,12 @@ function UpdateUserImage() {
 
     
 
-    return(<>
+    return(<div style={{marginTop: "3rem"}}>
     <Container>
         <Row className="justify-content-md-center">
           <Col xs={12} md={6}>
-          <h1>upload new author image</h1>
-            <Form onSubmit={handleSubmit} encType="multipart/form-data">
+          <h1 style={{fontFamily: "fantasy"}}>upload new author image</h1>
+            <Form onSubmit={handleSubmit} encType="multipart/form-data" style={{marginTop: "1.5rem"}}>
               <Form.Group className="mb-3" controlId="formBasicAuthorImage">
                 <Form.Label>upload author image</Form.Label>
                 <Form.Control
@@ -54,7 +54,7 @@ function UpdateUserImage() {
     </Row>
     </Container>
     
-    </>)
+    </div>)
 }
 
 export default UpdateUserImage
