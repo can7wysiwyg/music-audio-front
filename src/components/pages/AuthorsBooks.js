@@ -1,10 +1,8 @@
-
+import { Flipper, Flipped } from 'react-flip-toolkit';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import "./styles/books.css";
-import { useContext } from "react";
-import { GlobalState } from "../../GlobalState";
 
 
 const AuthorsBooks = () => {
@@ -42,7 +40,7 @@ const AuthorsBooks = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="container">
+    <div className="container" style={{marginTop: "6rem", marginBottom: "2rem"}}>
       <div className="row">
         {currentCards.map((result, index) => (
           <div key={index} className="col-md-4">
@@ -70,9 +68,14 @@ const AuthorsBooks = () => {
 
 const MyBooks = ({result, id}) => {
     const[writer, setWriter] = useState([])
-    const state = useContext(GlobalState);
-   const [isLogged] = state.userApi.isLogged;
-   const[isAdmin] = state.userApi.isAdmin
+    const [isFlipped, setIsFlipped] = useState(false);
+
+   const handleFlip = () => {
+     setIsFlipped(!isFlipped);
+   };
+ 
+ 
+ 
 
 
     useEffect(() => {
@@ -92,8 +95,54 @@ const MyBooks = ({result, id}) => {
              
           return (
             <>
+
+<div>
+      
+<Flipper flipKey={isFlipped}>
+  
+  <div className="card flipping" onClick={handleFlip}>
+    <div className="card-front">
+      <Flipped flipId="card-front">
+        <div className="card-body">
+          <img src={result.audioImage} alt="Card Front" className="card-image" />
+          <div className="card-details">
+            <a href={`/book_single/${result._id}`} style={{ textDecoration: "none" }} className="card-title">{result.bookTitle}</a>
+            <p className="card-text">{writer.AuthorName}</p>
+          </div>
+        </div>
+      </Flipped>
+    </div>
+
+    <div className="card-back">
+  <Flipped flipId="card-back">
+    <div className="card-body">
+      <a href={`/book_single/${result._id}`} style={{ textDecoration: "none" }} className="card-title">{result.bookTitle}</a>
+      <div className="audio-container">
+        <div className="audio-player">
+          <audio controls>
+            <source src={result.audioBook} type="audio/mpeg" />
+          </audio>
+        </div>
+      </div>
+    </div>
+  </Flipped>
+</div>
+
+
     
-    <div className="book-card">
+  </div>
+</Flipper>
+
+</div>
+
+
+
+
+
+
+
+    
+    {/* <div className="book-card">
       <div className="image-container">
         <img className="book-image" src={result.audioImage} alt="Book 1" />
       </div>
@@ -110,7 +159,7 @@ const MyBooks = ({result, id}) => {
       </div>
     </div>
     <br />
-    
+     */}
        
               
             </>
