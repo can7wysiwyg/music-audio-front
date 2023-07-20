@@ -33,7 +33,7 @@ function NavHeader() {
     if (isLogged !== true) {
       return (
         <Link className="navbar-brand" to="/">
-          Your Logo
+          Book Advertisers
         </Link>
       );
     } else {
