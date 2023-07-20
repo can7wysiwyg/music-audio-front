@@ -17,7 +17,7 @@ function UpdateUserImage() {
 
         formData.append("AuthorImage", AuthorImage)
 
-        await axios.put(`https://bookadvertisers.netlify.app/author/update_profilePic/${id}`, formData, {
+        await axios.put(`https://audiobooksapi.onrender.com/author/update_profilePic/${id}`, formData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
