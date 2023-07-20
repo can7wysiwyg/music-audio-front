@@ -6,29 +6,38 @@ import axios from "axios";
 
 
 
-
+const Loader = () => {
+  return (
+    <div className="loader">
+      <div className="spinner"></div>
+    </div>
+  );
+};
 
 
 
 function Home() {
 
   const [trendingVoices, setTrendingVoices] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     const getAuthors = async () => {
       try {
         const res = await axios.get("https://audiobooksapi.onrender.com/author/show_all");
-        const authors = res.data.authors || []; // Set default value as an empty array
-        const lastThreeAuthors = authors.slice(-3); // Get the last 3 authors
+        const authors = res.data.authors || [];
+        const lastThreeAuthors = authors.slice(-3);
         setTrendingVoices(lastThreeAuthors);
+        setIsLoading(false); // Mark loading as complete
       } catch (error) {
         console.log(error);
+        setIsLoading(false); // Mark loading as complete even on error
       }
     };
 
     getAuthors();
-  }, []);
-
+  }, [])
 
   
 
@@ -102,8 +111,13 @@ function Home() {
     </h2>
 
     <div className="container py-5">
-      <div className="row justify-content-center">
-        {trendingVoices.map(voice => (
+    <div className="row justify-content-center">
+    {isLoading ? (
+        <Loader />
+
+      ) : (
+       
+        trendingVoices.map((voice) => (
           <div className="col-12 col-lg-4" key={voice._id}>
             <div className="card box-shadow mx-auto my-5 feat" style={{ width: "18rem" }}>
             <div className="feat-image-container">
@@ -133,11 +147,17 @@ function Home() {
                     <i className="fas fa-play ikon"></i>
                   </a>
                 </div>
+              
               </div>
             </div>
+
+          
           </div>
-        ))}
-      </div>
+        ))
+      )}
+
+
+    </div>
     </div>
   </div>
 </section>

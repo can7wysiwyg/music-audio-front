@@ -136,7 +136,7 @@ const BooksToEdit = ({ book }) => {
             {book.bookTitle}
           </Card.Link>
           <Card.Text>{newAuthor.AuthorName}</Card.Text>
-          {/* <Card.Text style={{ flex: 1 }}>{book.bookDescription}</Card.Text> */}
+          
           <audio controls>
             <source src={book.audioBook} type="audio/mpeg" />
             Your browser does not support the audio element.
@@ -167,6 +167,10 @@ const BooksToEdit = ({ book }) => {
             <li>
               <a href={`/book_update_picture/${book._id}`}>update book picture</a>
             </li>
+            <li>
+              <a href={`/book_update_sell_link/${book._id}`}>update book link</a>
+            </li>
+
           </ul>
         </Modal.Body>
         <Modal.Footer>

@@ -3,8 +3,6 @@ import "./styles/booksingle.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import moment from "moment/moment";
-import { useContext } from "react";
-import { GlobalState } from "../../GlobalState";
 
 
 function BookSingle() {
@@ -15,9 +13,6 @@ function BookSingle() {
   const [categories, setCategories] = useState([]);
   const [genres, setGenre] = useState({});
   const bookDetailsRef = useRef(null);
-  const state = useContext(GlobalState)
-  const [isLogged] = state.userApi.isLogged;
-   const[isAdmin] = state.userApi.isAdmin
 
 
   useEffect(() => {
@@ -105,16 +100,16 @@ function BookSingle() {
             <p>Genre: {genres.bookGenre} </p>
             <p>Description: {singleBook.bookDescription}</p>
             <p>Released On: {moment(singleBook.released).format("MMM D YYYY")}</p>
-            { isLogged === true && isAdmin === true ? <p className='card-text'> <a href={`/view_single_book/${singleBook._id}`}> manage book</a></p> : "" }
+    
             <div className="audio-player">
               <audio controls>
                 <source src={singleBook.audioBook} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
             </div>
-            <a href="/" className="btn btn-primary">
+        <a href={singleBook.bookLink} className="btn btn-primary" target="_blank" rel="noreferrer">
               Buy Now
-            </a>
+            </a> 
           </div>
         </>
       );

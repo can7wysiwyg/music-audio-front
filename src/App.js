@@ -30,10 +30,10 @@ import AuthorLocationEdit from "./components/admin/AuthorLocationEdit";
 import AuthorPhoneEdit from "./components/admin/AuthorPhoneEdit";
 import ViewSingle from "./components/admin/ViewSingle";
 import BookDeleteAll from "./components/admin/BookDeleteAll";
-import ViewSingleBook from "./components/admin/ViewSingleBook";
 import UpdateUserImage from "./components/admin/UpdateUserImage";
 import BookUpdatePicture from "./components/admin/BookUpdatePicture";
 import UpdateBookAudio from "./components/admin/UpdateBookAudio";
+import BookLink from "./components/admin/BookLink";
 
 
 
@@ -74,10 +74,10 @@ function App() {
     <Route path="/author_phone/:id" element={<AuthorPhoneEdit />} />
     <Route path="/view_single/:id" element={<ViewSingle />} />
     <Route path="/book_delete_all/:id" element={ <BookDeleteAll /> } />
-    <Route path="/view_single_book/:id" element={<ViewSingleBook /> } />
     <Route path="/update_user_image/:id" element={<UpdateUserImage />} />
     <Route path="/book_update_picture/:id" element={<BookUpdatePicture />} />
     <Route path="/book_update_audio/:id" element={<UpdateBookAudio />} />
+    <Route path="/book_update_sell_link/:id" element={<BookLink />} />
     
 
 

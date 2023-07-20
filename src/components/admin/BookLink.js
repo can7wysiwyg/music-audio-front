@@ -1,0 +1,61 @@
+import React from "react";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
+import { GlobalState } from "../../GlobalState";
+import { useState } from "react";
+import axios from "axios";
+
+
+
+function BookLink() {
+    const { id } = useParams();
+  const state = useContext(GlobalState);
+  const token = state.token;
+  const [bookLink, setNewLink] = useState("");
+
+  const handleChange = (event) => {
+    setNewLink(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    await axios.put(`https://audiobooksapi.onrender.com/audio/update_all/${id}`, { bookLink }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    window.location.href = `/book_single/${id}`;
+  };
+
+
+
+    return(<>
+    <div className="container d-flex justify-content-center align-items-center" style={{marginTop: "3rem"}}>
+      <div className="col-md-6">
+        <h1 className="mb-4">Update Book Link</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <input
+              type="text"
+              placeholder="New book link"
+              className="form-control"
+              id="bookLink"
+              name="bookLink"
+              value={bookLink}
+              onChange={handleChange}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Update Book Link
+          </button>
+        </form>
+      </div>
+    </div>
+
+    
+    
+    </>)
+}
+
+export default BookLink
